@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringCpssApplication<PJCPSS>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "it.kennedy.cpss.PJCPSS.SpringCpssApplication",
+            "projectName": "PJCPSS",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringCpssApplication<PJCPSS>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "it.kennedy.cpss.pjcpss.SpringCpssApplication",
+            "projectName": "PJCPSS",
+            "args": ""
+        }
+    ]
+}
