@@ -6,7 +6,7 @@ services:
     container_name: AngularCPSS
     working_dir: /var/www/html
     volumes:
-      - ./ServiceCPSS:/var/www/html
+      - ./AngularCPSS:/var/www/html
     ports:
       - 8061:8061
     networks:

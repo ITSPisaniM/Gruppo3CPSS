@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.kennedy.cpss</groupId>
-	<artifactId>PJCPSS</artifactId>
+	<artifactId>SpringBootCPSS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringCPSS</name>
 	<description>Demo project for Spring Boot</description>

@@ -1,4 +1,4 @@
-package it.kennedy.cpss.pjcpss;
+package it.kennedy.cpss.springbootcpss;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

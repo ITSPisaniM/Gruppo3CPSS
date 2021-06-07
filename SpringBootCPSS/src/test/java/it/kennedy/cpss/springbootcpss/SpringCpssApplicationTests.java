@@ -1,4 +1,4 @@
-package it.kennedy.cpss.PJCPSS;
+package it.kennedy.cpss.springbootcpss;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

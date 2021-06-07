@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ServiceCPSS": {
+    "AngularCPSS": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ServiceCPSS",
+            "outputPath": "dist/AngularCPSS",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ServiceCPSS:build"
+            "browserTarget": "AngularCPSS:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ServiceCPSS:build:production"
+              "browserTarget": "AngularCPSS:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ServiceCPSS:build"
+            "browserTarget": "AngularCPSS:build"
           }
         },
         "test": {
@@ -113,16 +113,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ServiceCPSS:serve"
+            "devServerTarget": "AngularCPSS:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ServiceCPSS:serve:production"
+              "devServerTarget": "AngularCPSS:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ServiceCPSS"
+  "defaultProject": "AngularCPSS"
 }
