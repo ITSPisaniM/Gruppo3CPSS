@@ -84,6 +84,8 @@ public class MavenWrapperDownloader {
         if(!outputFile.getParentFile().exists()) {
             if(!outputFile.getParentFile().mkdirs()) {
                 logger("- ERROR creating output directory '" + outputFile.getParentFile().getAbsolutePath() + "'");
+            } else {
+                logger("- SUCCESS creating output directory '" );
             }
         }
         logger("- Downloading to: " + outputFile.getAbsolutePath());
@@ -100,27 +102,27 @@ public class MavenWrapperDownloader {
 
     private static void downloadFileFromURL(String urlString, File destination) throws Exception {
         try {
-        if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
-            String username = System.getenv("MVNW_USERNAME");
-            char[] password = System.getenv("MVNW_PASSWORD").toCharArray();
-            Authenticator.setDefault(new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
-        }
-        URL website = new URL(urlString);
-        ReadableByteChannel rbc;
-        rbc = Channels.newChannel(website.openStream());
-        FileOutputStream fos = new FileOutputStream(destination);
-        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+            if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
+                String username = System.getenv("MVNW_USERNAME");
+                char[] password = System.getenv("MVNW_PASSWORD").toCharArray();
+                Authenticator.setDefault(new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+            }
+
+            URL website = new URL(urlString);
+            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+            FileOutputStream fos = new FileOutputStream(destination);
+            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         
         } catch (Exception e) {
             log("Exception: " + e);
         } finally {
-            fos.close();
             rbc.close();
+            fos.close();
         }
     }
 
