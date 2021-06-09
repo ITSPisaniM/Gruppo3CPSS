@@ -50,7 +50,7 @@ public class MavenWrapperDownloader {
      */
     private static final String PROPERTY_NAME_WRAPPER_URL = "wrapperUrl";
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         logger("- Downloader started");
         File baseDirectory = new File(args[0]);
         logger("- Using base directory: " + baseDirectory.getAbsolutePath());
@@ -61,9 +61,8 @@ public class MavenWrapperDownloader {
         String url = DEFAULT_DOWNLOAD_URL;
         if(mavenWrapperPropertyFile.exists()) {
             FileInputStream mavenWrapperPropertyFileInputStream = null;
-            try {
+            try (Properties mavenWrapperProperties = new Properties();){
                 mavenWrapperPropertyFileInputStream = new FileInputStream(mavenWrapperPropertyFile);
-                Properties mavenWrapperProperties = new Properties();
                 mavenWrapperProperties.load(mavenWrapperPropertyFileInputStream);
                 url = mavenWrapperProperties.getProperty(PROPERTY_NAME_WRAPPER_URL, url);
             } catch (IOException e) {
@@ -76,6 +75,7 @@ public class MavenWrapperDownloader {
                 } catch (IOException e) {
                     // Ignore ...
                 }
+                mavenWrapperProperties.close();
             }
         }
         logger("- Downloading from: " + url);
@@ -100,8 +100,9 @@ public class MavenWrapperDownloader {
         }
     }
 
-    private static void downloadFileFromURL(String urlString, File destination) throws Exception {
-        try {
+    private static void downloadFileFromURL(String urlString, File destination) throws Exception.FileNotFoundException {
+        try (ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+        FileOutputStream fos = new FileOutputStream(destination);URL website = new URL(urlString);){
             if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
                 String username = System.getenv("MVNW_USERNAME");
                 char[] password = System.getenv("MVNW_PASSWORD").toCharArray();
@@ -112,10 +113,7 @@ public class MavenWrapperDownloader {
                     }
                 });
             }
-
-            URL website = new URL(urlString);
-            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            FileOutputStream fos = new FileOutputStream(destination);
+            website = urlString;
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         
         } catch (Exception e) {
