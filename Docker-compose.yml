@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   AngularCPSS:
-    image: node:14.16
+    image: node:14.17-alpine
     container_name: AngularCPSS
     working_dir: /var/www/html
     volumes:
@@ -25,6 +25,18 @@ services:
       - 6000:5432
     networks:
       - rete-dev
+
+  SpringBootCPSS:
+    image: maven:3.8.1-openjdk-11-slim
+    container_name: SpringBootCPSS
+    working_dir: /usr/src/mymaven
+    volumes:
+      - ./SpringBootCPSS:/usr/src/mymaven
+    ports:
+      - 8080:8080
+    networks:
+      - rete-dev
+    entrypoint: ["mvn", "spring-boot:run"]
 
 volumes:
   data-pg-cpss:

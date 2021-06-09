@@ -1,3 +1,7 @@
+-- Create a new database called 'gestioneordini;'
+CREATE DATABASE gestioneordini;
+\connect gestioneordini;
+
 /*items*/
 create table "TItems"
 (
