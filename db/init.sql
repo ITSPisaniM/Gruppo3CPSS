@@ -74,9 +74,9 @@ create table "TArticoliAcquistati"
         constraint tsrticoliscquistati_pk
             primary key,
     "AcquistoID"             integer,
-    "ITemID"                 date,
+    "ITemID"                 integer,
     "QuantitaAcquistata"     integer,
-    "PrezzoUnitarioAcquisto" integer
+    "PrezzoUnitarioAcquisto" decimal
 );
 /*ordini*/
 create table "TOrders"
