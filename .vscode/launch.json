@@ -9,16 +9,6 @@
             "mainClass": "it.kennedy.cpss.springbootcpss.SpringCpssApplication",
             "projectName": "SpringBootCPSS",
             "args": ""
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-SpringCpssApplication<SpringBootCPSS>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "mainClass": "it.kennedy.cpss.springbootcpss.SpringCpssApplication",
-            "projectName": "SpringBootCPSS",
-            "args": ""
         }
     ]
 }
