@@ -11,7 +11,9 @@ public class SpringCpssApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringCpssApplication.class, args);
 		Logger logger = Logger.getLogger(SpringCpssApplication.class.getName());
-		logger.info("\n------------------------------------------------------------------------------------------------------------");
+		logger.info("------------------------------");
+		logger.info("\tAPPLICATION STARTED UP");
+		logger.info("------------------------------");
 	}
 
 }
