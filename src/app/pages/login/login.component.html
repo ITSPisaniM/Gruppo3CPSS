@@ -1,1 +1,33 @@
-<p>login works!</p>
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body divLogin">
+
+                <form [formGroup]="loginForm">
+                  <mat-card>
+                    <div class="row">
+                      <mat-form-field class="full-width">
+                        <mat-label>Username</mat-label>
+                        <input formControlName="username" type="Username" matInput placeholder="admin">
+                      </mat-form-field>
+                    </div>
+                    <div class="row">
+                      <mat-form-field class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input formControlName="password" type="Password" matInput placeholder="admin">
+                      </mat-form-field>
+                    </div>
+                    <button mat-flat-button color="primary" (click)="login()">Login</button>
+                  </mat-card>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </main>
+</div>
