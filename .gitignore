@@ -17,5 +17,5 @@
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
 
-### SonarQube
+### SonarQube properties
 SpringBootCPSS/sonar-project.properties
