@@ -19,7 +19,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
-      - data-pg-cpss:/var/lib/postgresql/data
+      # - data-pg-cpss:/var/lib/postgresql/data
       - ./db/:/docker-entrypoint-initdb.d/
     ports:
       - 6000:5432
