@@ -12,9 +12,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { OrdiniComponent } from './pages/ordini/ordini.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, OrdiniComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +33,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatListModule,
     LayoutModule,
     MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCardModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
