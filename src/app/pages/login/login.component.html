@@ -9,20 +9,24 @@
                 <form [formGroup]="loginForm">
                   <mat-card>
                     <div class="row">
-                      <mat-form-field class="full-width">
-                        <mat-label>Username</mat-label>
-                        <input formControlName="username" type="Username" matInput placeholder="admin">
+                      <mat-form-field appearance="standard">
+                        <mat-label>username</mat-label>
+                        <input matInput>
+                        <mat-hint>Hint</mat-hint>
                       </mat-form-field>
                     </div>
                     <div class="row">
-                      <mat-form-field class="full-width">
-                        <mat-label>Password</mat-label>
-                        <input formControlName="password" type="Password" matInput placeholder="admin">
+                      <mat-form-field appearance="standard">
+                        <mat-label>passworda  </mat-label>
+                        <input matInput>
+                        <mat-hint>Hint</mat-hint>
                       </mat-form-field>
                     </div>
-                    <button mat-flat-button color="primary" (click)="login()">Login</button>
+                    <button type="button" mat-flat-button color="primary" (click) ="login()">Login</button>
                   </mat-card>
                 </form>
+
+                
               </div>
             </div>
 

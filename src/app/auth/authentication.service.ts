@@ -47,7 +47,7 @@ export class AuthenticationService {
   login(context: LoginContext): Observable<any> {
     let bodyString = JSON.stringify(context); // Stringify payload
     let headers = new Headers({ "Content-Type": "application/json" }); // ... Set content type to JSON
-    return this.api.post(this.path+ "/login", context);
+    return this.api.post(this.path + "/login", context);
   }
 
   // register(context: any): Observable<any> {
@@ -79,12 +79,18 @@ export class AuthenticationService {
 
   isAuthenticated(): boolean {
     try {
-      if (window.sessionStorage.getItem("jwt")) {
+      // if (window.sessionStorage.getItem("jwt")) {
+      //   this.token = true;
+      // } else {
+      //   this.token = false;
+      // }
+      // return this.token;
+
+      if (window.sessionStorage.getItem("logged") == "true") {
         this.token = true;
       } else {
         this.token = false;
       }
-      return this.token;
     } catch (e) {
       return false;
     }
@@ -124,11 +130,11 @@ export class AuthenticationService {
     }
   }
 
-//   get username(): string{
-//     return this.jwtHelper.decodeToken(sessionStorage.getItem("jwt"))['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
-//   }
-  
-//   get role(): string{
-//     return this.jwtHelper.decodeToken(sessionStorage.getItem("jwt"))['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-//   }
+  //   get username(): string{
+  //     return this.jwtHelper.decodeToken(sessionStorage.getItem("jwt"))['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+  //   }
+
+  //   get role(): string{
+  //     return this.jwtHelper.decodeToken(sessionStorage.getItem("jwt"))['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+  //   }
 }

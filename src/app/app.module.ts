@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationGuard } from './auth/authentication.guard';
 import { ApiService } from './services/api.service';
 import { AuthenticationService } from './auth/authentication.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, LoginComponent],
@@ -29,8 +30,10 @@ import { AuthenticationService } from './auth/authentication.service';
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
+    ApiService,AuthenticationGuard, AuthenticationService,
   ],
   bootstrap: [AppComponent],
 })
