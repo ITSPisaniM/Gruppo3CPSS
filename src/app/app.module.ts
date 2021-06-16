@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './pages/login/login.component';
 import {MatCardModule} from '@angular/material/card';
@@ -16,9 +15,15 @@ import { AuthenticationGuard } from './auth/authentication.guard';
 import { ApiService } from './services/api.service';
 import { AuthenticationService } from './auth/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +36,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatRadioModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    LayoutModule,
+    MatFormFieldModule,
   ],
   providers: [
     ApiService,AuthenticationGuard, AuthenticationService,
