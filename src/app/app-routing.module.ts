@@ -2,8 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 //components for routing
+import { AppComponent } from './app.component';
+import { AuthenticationGuard } from './auth/authentication.guard';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: AppComponent,
+    canActivate: [AuthenticationGuard],
+  },
   {
     path: 'login',
     component: LoginComponent,

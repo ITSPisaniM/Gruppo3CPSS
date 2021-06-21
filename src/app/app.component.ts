@@ -1,26 +1,27 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
-import * as moment from 'moment';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { AuthenticationService } from './auth/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'AngularCPSS';
-  loginPage: boolean = false;
+  public loginPage: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private location: Location
+    private location: Location,
+    private authservice: AuthenticationService
   ) {}
 
   ngOnInit() {
-    if (this.location.path() === '/login') {
+    if (this.location.isCurrentPathEqualTo('/login')) {
       this.loginPage = true;
     } else {
       this.loginPage = false;
@@ -34,10 +35,8 @@ export class AppComponent {
       shareReplay()
     );
 
-  public login(): void {
-    const expiresAt = moment().add(10000000, 'second');
-
-    localStorage.setItem('id_token', 'authResult.idToken');
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+  public logout(): void {
+    this.loginPage = true;
+    this.authservice.logOut();
   }
 }
