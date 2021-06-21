@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import {
@@ -17,6 +21,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   isLogged: boolean = false;
   messaggio: string;
+  wrongLogin: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,11 +45,16 @@ export class LoginComponent {
         username: this.loginForm.get('username').value,
         password: this.loginForm.get('password').value,
       };
-      this.auth.login(loginContext).subscribe((res) => {
-        this.cookie.set('token', res.data[0].newToken);
-        this.router.navigate(['/dash'], { replaceUrl: true });
-        this.pp.loginPage = false;
-      });
+      this.auth.login(loginContext).subscribe(
+        (res) => {
+          this.cookie.set('token', res.data[0].newToken);
+          this.router.navigate(['/dash'], { replaceUrl: true });
+          this.pp.loginPage = false;
+        },
+        (error) => {
+          this.wrongLogin = true;
+        }
+      );
     } else {
       this.messaggio = 'Devi inserire username e password';
     }
