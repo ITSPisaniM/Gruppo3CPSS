@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import * as moment from 'moment';
 import { AuthenticationService } from './auth/authentication.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',

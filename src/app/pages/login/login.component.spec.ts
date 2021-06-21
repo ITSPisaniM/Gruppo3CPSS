@@ -13,20 +13,22 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      imports: [
-        NoopAnimationsModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatInputModule,
-        MatRadioModule,
-        MatSelectModule,
-      ]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoginComponent],
+        imports: [
+          NoopAnimationsModule,
+          ReactiveFormsModule,
+          MatButtonModule,
+          MatCardModule,
+          MatInputModule,
+          MatRadioModule,
+          MatSelectModule,
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);

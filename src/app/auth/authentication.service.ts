@@ -4,7 +4,6 @@ import { of as observableOf, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CookieService } from 'ngx-cookie-service';
-import { AppComponent } from '../app.component';
 
 export interface Credentials {
   // Customize received credentials here

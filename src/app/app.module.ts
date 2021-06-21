@@ -21,12 +21,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TestComponent } from './pages/test/test.component';
 import { AuthGuard } from './auth/auth.guard';
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, TestComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
