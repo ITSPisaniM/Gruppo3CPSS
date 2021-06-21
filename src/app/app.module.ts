@@ -5,20 +5,29 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './pages/login/login.component';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationGuard } from './auth/authentication.guard';
+import { ApiService } from './services/api.service';
+import { AuthenticationService } from './auth/authentication.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthGuard } from './auth/auth.guard';
+import { CookieService } from 'ngx-cookie-service';
 import { OrdiniComponent } from './pages/ordini/ordini.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, OrdiniComponent],
@@ -27,8 +36,14 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatMenuModule,
+    MatCardModule,
+    MatInputModule,
     MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatMenuModule,
     MatIconModule,
     MatSidenavModule,
     MatListModule,
@@ -41,7 +56,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatExpansionModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    AuthenticationGuard,
+    AuthenticationService,
+    AuthGuard,
+    CookieService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
