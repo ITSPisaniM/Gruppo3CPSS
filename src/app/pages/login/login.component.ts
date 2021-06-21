@@ -3,53 +3,50 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-import { AuthenticationService } from 'src/app/auth/authentication.service';
-import { UtenzaService } from 'src/app/services/utenza.service';
+import {
+  AuthenticationService,
+  LoginContext,
+} from 'src/app/auth/authentication.service';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
   loginForm: FormGroup;
   isLogged: boolean = false;
   messaggio: string;
 
-  user = new FormControl('', [Validators.required]);
-  pass = new FormControl('', [Validators.required]);
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public utenzaService: UtenzaService,
-    public pp: AppComponent
-  ) { }
+    private auth: AuthenticationService,
+    private cookie: CookieService,
+    private pp: AppComponent
+  ) {}
 
   ngOnInit(): void {
     this.pp.loginPage = true;
-
     this.loginForm = this.fb.group({
-      username: this.user,
-      password: this.pass
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
   login() {
-    //if (this.loginForm.controls.user.get) {
-      this.isLogged = true;
-      window.sessionStorage.setItem("logged", "true");
-      this.pp.loginPage = false;
-      this.router.navigate(['/dash'], { replaceUrl: true });
-    //}else{
-     //this.messaggio = "Devi inserire username e password"
-      //console.log(this.loginForm.controls[this.user.])
-    //}
-
-  }
-
-  logout() {
-    this.isLogged = false;
-    window.sessionStorage.clear();
+    if (this.loginForm.valid) {
+      var loginContext: LoginContext = {
+        username: this.loginForm.get('username').value,
+        password: this.loginForm.get('password').value,
+      };
+      this.auth.login(loginContext).subscribe((res) => {
+        this.cookie.set('token', res.data[0].newToken);
+        this.router.navigate(['/dash'], { replaceUrl: true });
+        this.pp.loginPage = false;
+      });
+    } else {
+      this.messaggio = 'Devi inserire username e password';
+    }
   }
 }

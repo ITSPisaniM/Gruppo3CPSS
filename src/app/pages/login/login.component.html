@@ -2,38 +2,43 @@
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
-          <div class="card-group">
-            <div class="card p-4">
-              <div class="card-body">
-
-                <form [formGroup]="loginForm" ngNativeValidate >
-                  <mat-card class="lgin">
-                    <div class="row">
-                      <mat-form-field appearance="standard">
-                        <mat-label>username</mat-label>
-                        <input formControlName="username" [formControl]="user" matInput required>
-                        <mat-hint>Hint</mat-hint>
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field appearance="standard">
-                        <mat-label>password</mat-label>
-                        <input formControlName="password" [formControl]="pass" matInput required>
-                        <mat-hint>Hint</mat-hint>
-                      </mat-form-field>
-                    </div><br>
-                    <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
-                      <button type="button" mat-flat-button color="primary" (click) ="login()">Login</button>
-                    </div>
-                  </mat-card>
-                </form>
-
-                
-              </div>
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+              <form [formGroup]="loginForm" ngNativeValidate>
+                <mat-card class="lgin">
+                  <div class="row">
+                    <mat-form-field appearance="standard">
+                      <mat-label>Username</mat-label>
+                      <input formControlName="username" matInput required />
+                    </mat-form-field>
+                  </div>
+                  <div class="row">
+                    <mat-form-field appearance="standard">
+                      <mat-label>Password</mat-label>
+                      <input formControlName="password" matInput required />
+                    </mat-form-field>
+                  </div>
+                  <br />
+                  <div
+                    class="row"
+                    style="padding-top: 5px; padding-bottom: 5px"
+                  >
+                    <button
+                      type="submit"
+                      mat-flat-button
+                      color="primary"
+                      (click)="login()"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </mat-card>
+              </form>
             </div>
-
           </div>
         </div>
       </div>
+    </div>
   </main>
 </div>

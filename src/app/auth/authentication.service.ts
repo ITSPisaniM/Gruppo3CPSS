@@ -1,11 +1,10 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { from as observableFrom, of as observableOf, Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { Router } from "@angular/router";
-//import { JwtHelperService } from "@auth0/angular-jwt";
-import { ApiService } from "../services/api.service";
-
+import { of as observableOf, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { CookieService } from 'ngx-cookie-service';
+import { AppComponent } from '../app.component';
 
 export interface Credentials {
   // Customize received credentials here
@@ -14,11 +13,11 @@ export interface Credentials {
 }
 
 export interface LoginContext {
-  Username: string;
-  Password: string;
+  username: string;
+  password: string;
 }
 
-const credentialsKey = "jwt";
+const credentialsKey = 'jwt';
 
 /**
  * Provides a base for authentication workflow.
@@ -26,7 +25,7 @@ const credentialsKey = "jwt";
  */
 @Injectable()
 export class AuthenticationService {
-  private path: string = "utente";
+  private path: string = 'utente';
 
   public token: boolean = false;
 
@@ -35,7 +34,11 @@ export class AuthenticationService {
   private _credentials: string;
   private _features: any = null;
 
-  constructor(private router: Router, public api: ApiService) {//, public jwtHelper: JwtHelperService
+  constructor(
+    private router: Router,
+    public api: ApiService,
+    private cookie: CookieService
+  ) {
     this._credentials = sessionStorage.getItem(credentialsKey);
   }
 
@@ -46,16 +49,9 @@ export class AuthenticationService {
    */
   login(context: LoginContext): Observable<any> {
     let bodyString = JSON.stringify(context); // Stringify payload
-    let headers = new Headers({ "Content-Type": "application/json" }); // ... Set content type to JSON
-    return this.api.post(this.path + "/login", context);
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    return this.api.post(this.path + '/login', context);
   }
-
-  // register(context: any): Observable<any> {
-  //   let bodyString = JSON.stringify(context); // Stringify payload
-  //   let headers = new Headers({ "Content-Type": "application/json" }); // ... Set content type to JSON
-  //   console.log("Body register: ", bodyString);
-  //   return this.api.post(this.path + "/register", context);
-  // }
 
   /**
    * Logs out the user and clear credentials.
@@ -68,8 +64,8 @@ export class AuthenticationService {
   }
 
   logOut() {
-    window.sessionStorage.clear();
-    this.router.navigate(["/login"], { replaceUrl: true });
+    this.cookie.delete('token');
+    this.router.navigate(['/login'], { replaceUrl: true });
   }
 
   /**
@@ -79,14 +75,7 @@ export class AuthenticationService {
 
   isAuthenticated(): boolean {
     try {
-      // if (window.sessionStorage.getItem("jwt")) {
-      //   this.token = true;
-      // } else {
-      //   this.token = false;
-      // }
-      // return this.token;
-
-      if (window.sessionStorage.getItem("logged") == "true") {
+      if (this.cookie.get('token').length > 0) {
         this.token = true;
       } else {
         this.token = false;
@@ -126,16 +115,7 @@ export class AuthenticationService {
     if (credentials) {
       sessionStorage.setItem(credentialsKey, credentials);
     } else {
-      //sessionStorage.removeItem(credentialsKey);
       sessionStorage.removeItem(credentialsKey);
     }
   }
-
-  //   get username(): string{
-  //     return this.jwtHelper.decodeToken(sessionStorage.getItem("jwt"))['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
-  //   }
-
-  //   get role(): string{
-  //     return this.jwtHelper.decodeToken(sessionStorage.getItem("jwt"))['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-  //   }
 }

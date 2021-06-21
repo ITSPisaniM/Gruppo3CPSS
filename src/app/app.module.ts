@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './pages/login/login.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -23,7 +23,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TestComponent } from './pages/test/test.component';
 import { AuthGuard } from './auth/auth.guard';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, TestComponent],
@@ -47,7 +47,11 @@ import { AuthGuard } from './auth/auth.guard';
     MatFormFieldModule,
   ],
   providers: [
-    ApiService,AuthenticationGuard, AuthenticationService, AuthGuard
+    ApiService,
+    AuthenticationGuard,
+    AuthenticationService,
+    AuthGuard,
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })

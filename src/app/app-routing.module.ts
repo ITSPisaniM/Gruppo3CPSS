@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     component: AppComponent,
-    canActivate:[AuthenticationGuard]
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'login',
@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'dash',
     component: TestComponent,
-    canActivate:[AuthenticationGuard]
+    canActivate: [AuthenticationGuard],
   },
 ];
 
