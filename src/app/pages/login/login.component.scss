@@ -1,10 +1,8 @@
-.divLogin{
-    width: 40%;
-    height: 100%;
-    align-content: center;
-    display: inline-flexbox;
-    text-align: center;
-    position: absolute;
-    //margin-left: 40%;
-    //margin-top: 10%;
-  }
+.lgin{
+  display: grid;
+  justify-content: center;
+  margin:auto;
+  max-width: 40%;
+  margin-top: 15%;
+  margin-bottom: 15%;
+}

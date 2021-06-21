@@ -1,9 +1,10 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
+import { AuthenticationService } from './auth/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +13,19 @@ import { Location } from '@angular/common';
 })
 export class AppComponent {
   title = 'AngularCPSS';
-  loginPage: boolean = false;
+  public loginPage: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private location: Location
+    private location: Location,
+    private authservice: AuthenticationService
+
   ) {}
 
   ngOnInit() {
     if (this.location.path() === '/login') {
       this.loginPage = true;
-    } else {
-      this.loginPage = false;
-    }
+    } 
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -34,10 +35,8 @@ export class AppComponent {
       shareReplay()
     );
 
-  public login(): void {
-    const expiresAt = moment().add(10000000, 'second');
-
-    localStorage.setItem('id_token', 'authResult.idToken');
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+  public logout(): void {
+    this.loginPage=true;
+    this.authservice.logOut();
   }
 }

@@ -29,6 +29,10 @@
       <button *ngIf="(isHandset$ | async) === false" mat-button>
         Acquisti
       </button>
+      <span style="flex: 1 1 auto;"></span>
+      <button mat-icon-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -21,9 +21,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TestComponent } from './pages/test/test.component';
+import { AuthGuard } from './auth/auth.guard';
+
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, TestComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,7 +47,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatFormFieldModule,
   ],
   providers: [
-    ApiService,AuthenticationGuard, AuthenticationService,
+    ApiService,AuthenticationGuard, AuthenticationService, AuthGuard
   ],
   bootstrap: [AppComponent],
 })

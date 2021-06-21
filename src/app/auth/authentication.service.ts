@@ -68,7 +68,7 @@ export class AuthenticationService {
   }
 
   logOut() {
-    this.token = false;
+    window.sessionStorage.clear();
     this.router.navigate(["/login"], { replaceUrl: true });
   }
 
@@ -91,6 +91,7 @@ export class AuthenticationService {
       } else {
         this.token = false;
       }
+      return this.token;
     } catch (e) {
       return false;
     }
