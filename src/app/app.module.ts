@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationGuard } from './auth/authentication.guard';
 import { ApiService } from './services/api.service';
 import { AuthenticationService } from './auth/authentication.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -28,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { TokenInterceptor } from './auth/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, OrdiniComponent],
@@ -62,6 +63,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AuthenticationService,
     AuthGuard,
     CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -6,9 +6,15 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class OrdiniService {
+  path: string = 'ordini';
+
   constructor(private api: ApiService) {}
 
   public getOrdini(): Observable<any> {
-    return this.api.get('api/ordini/list', '');
+    return this.api.get(this.path + '/list', '');
+  }
+
+  public getOrdiniPagination(page: number, elements: number): Observable<any> {
+    return this.api.get(this.path + '/page/' + page + "/" + elements, '');
   }
 }

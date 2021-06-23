@@ -11,156 +11,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { OrdiniService } from 'src/app/services/ordini.service';
 
-export interface Card {
-  title: string;
-  subtitle: string;
-  text: string;
-  items: Item[];
+export interface Ordine {
+  amazonOrderId: string;
+  buyerEmail: string;
+  purchaseDate: Date;
+  ordersItems: Prodotto[];
 }
 
-export interface Item {
+export interface Prodotto {
   title: string;
-  text: string;
+  asin: string;
 }
-
-const DATA: Card[] = [
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-  {
-    title: 'Shiba Inu 1',
-    subtitle: 'Dog Breed',
-    text: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.',
-    items: [
-      {
-        title: 'Ciao',
-        text: 'come stai',
-      },
-      {
-        title: 'Ciao2',
-        text: 'come stai2',
-      },
-    ],
-  },
-];
 
 @Component({
   selector: 'app-ordini',
@@ -170,20 +31,23 @@ const DATA: Card[] = [
 export class OrdiniComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
-  dataSource: MatTableDataSource<Card> = new MatTableDataSource<Card>(DATA);
-  response: any;
+  dataSource: MatTableDataSource<Ordine>;
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private ordiniService: OrdiniService
   ) {}
 
   ngOnInit(): void {
-    this.changeDetectorRef.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.obs = this.dataSource.connect();
-    this.ordiniService.getOrdini().subscribe((res) => (this.response = res));
-    console.log(this.response);
+    this.ordiniService.getOrdini().subscribe((res) => {
+      console.log(res.data);
+      this.dataSource = new MatTableDataSource<Ordine>(res.data);
+      this.changeDetectorRef.detectChanges();
+      this.dataSource.paginator = this.paginator;
+      this.obs = this.dataSource.connect();
+    });
   }
+
   ngOnDestroy(): void {
     if (this.dataSource) {
       this.dataSource.disconnect();

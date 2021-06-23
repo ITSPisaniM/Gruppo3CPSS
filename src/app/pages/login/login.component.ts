@@ -47,8 +47,7 @@ export class LoginComponent {
       };
       this.auth.login(loginContext).subscribe(
         (res) => {
-          this.cookie.set('token', res.data[0].newToken);
-          this.router.navigate(['/dash'], { replaceUrl: true });
+          this.router.navigate(['/ordini'], { replaceUrl: true });
           this.pp.loginPage = false;
         },
         (error) => {
