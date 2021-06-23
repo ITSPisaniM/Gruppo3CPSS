@@ -12,7 +12,7 @@ import { AuthenticationService } from './auth/authentication.service';
 })
 export class AppComponent implements OnInit {
   title = 'AngularCPSS';
-  public loginPage: boolean = true;
+  public loginPage: boolean = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -21,11 +21,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.location.isCurrentPathEqualTo('/login')) {
-      this.loginPage = true;
-    } else {
-      this.loginPage = false;
-    }
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver

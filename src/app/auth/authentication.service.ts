@@ -4,6 +4,7 @@ import { of as observableOf, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AppComponent } from '../app.component';
 
 export interface Credentials {
   // Customize received credentials here
@@ -56,12 +57,7 @@ export class AuthenticationService {
    * Logs out the user and clear credentials.
    * @return {Observable<boolean>} True if the user was logged out successfully.
    */
-  logout(): Observable<boolean> {
-    // Customize credentials invalidation here
-    this.setCredentials();
-    return observableOf(true);
-  }
-
+  
   logOut() {
     this.cookie.delete('token');
     this.router.navigate(['/login'], { replaceUrl: true });

@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationGuard } from './auth/authentication.guard';
 import { ApiService } from './services/api.service';
 import { AuthenticationService } from './auth/authentication.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,9 +23,13 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthGuard } from './auth/auth.guard';
 import { CookieService } from 'ngx-cookie-service';
+import { ProdottiComponent } from './pages/prodotti/prodotti.component';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { PaginatorComponent } from '../shared/paginator/paginator.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,6 +48,7 @@ import { CookieService } from 'ngx-cookie-service';
     MatListModule,
     LayoutModule,
     MatFormFieldModule,
+    MatPaginatorModule,
   ],
   providers: [
     ApiService,
@@ -51,6 +56,11 @@ import { CookieService } from 'ngx-cookie-service';
     AuthenticationService,
     AuthGuard,
     CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
