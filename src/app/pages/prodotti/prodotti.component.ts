@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { ProdottiService } from 'src/app/services/prodotti.service';
-import { PaginatorComponent } from 'src/shared/paginator/paginator.component';
 
 @Component({
   selector: 'app-prodotti',
@@ -16,6 +15,12 @@ export class ProdottiComponent implements OnInit {
   ) { }
 
   public listaProdotti;
+
+  private elPerPage : number;
+
+  getElPerPage(value: number) {
+    this.elPerPage = value;
+  }
 
   ngOnInit(): void { 
     this.prod.getProdottiPagination().subscribe((res)=>{

@@ -12,13 +12,13 @@ export class ProdottiService {
     private api: ApiService,
     ) {}
 
-  private num : number;
+  
 
   public getProdotti():Observable<any>{
     return this.api.get('prodotti/list','');
   }
 
   public getProdottiPagination(): Observable<any> {
-    return this.api.get('prodotti/page/0/' + this.num, '');
+    return this.api.get('prodotti/page/0/5', '');
   }
 }
