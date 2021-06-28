@@ -18,7 +18,7 @@ export class ProdottiService {
     return this.api.get('prodotti/list','');
   }
 
-  public getProdottiPagination(): Observable<any> {
+  public getProdottiPagination(index:number, size:number): Observable<any> {
     return this.api.get('prodotti/page/0/5', '');
   }
 }

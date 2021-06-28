@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ProdottiService } from 'src/app/services/prodotti.service';
 import { Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-paginator',
@@ -18,27 +18,29 @@ export class PaginatorComponent implements OnInit {
 
   constructor(
     private prod:ProdottiService,
+    private mat: MatPaginatorModule
   ) { }
 
-  // @Input()
-  // pageIndex:number;
-  //emitter per paginator
+  //emitter per paginator....SIZE
   @Output() pageSizeEvent = new EventEmitter<number>()
   sendPageSize(value: number) {
     this.pageSizeEvent.emit(value);
+    console.log("AAAAAAAAAAAAAAAAAAAA1: " + this.pageSize);
   }
+   //emitter per paginator...INDEX
+   @Output() indexEvent = new EventEmitter<number>()
+   sendindexPage(value: number) {
+     this.indexEvent.emit(value);
+   }
 
 
+   getIndex(){
+    
+   }
+
+  pageEvent:PageEvent;
 
   ngOnInit(): void {
-  }
-  pageEvent: Observable<PageEvent>;
-  paginatorProperties: PageEvent;
-
-  event(){
-    this.pageEvent.subscribe((res)=>{
-      this.sendPageSize(res.pageIndex);
-    })
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
