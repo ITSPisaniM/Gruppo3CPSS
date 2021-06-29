@@ -20,21 +20,15 @@ export class ProdottiComponent implements OnInit {
   private elPerPage : number;
   getElPerPage(value: number) {
     this.elPerPage = value;
-  }
-  //indice della pagina
-  // private index : number;
-  // getindex(value: number) {
-  //   this.index = value;
-  //   console.log(this.index);
-  // }
-
-
-  ngOnInit(): void { 
     this.prod.getProdottiPagination(0, this.elPerPage).subscribe((res)=>{
       this.listaProdotti = res.data;
       console.log(this.listaProdotti);
-      console.log("AAAAAAAAAAAAAAAAAAAA2: " + this.elPerPage);
     })
   }
+
+  ngOnInit(): void { 
+    
+  }
+
 
 }

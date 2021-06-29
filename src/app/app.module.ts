@@ -26,7 +26,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { PaginatorComponent } from '../shared/paginator/paginator.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
+
+import {PaginatorModule} from 'primeng/paginator';
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent],
@@ -48,7 +50,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatListModule,
     LayoutModule,
     MatFormFieldModule,
-    MatPaginatorModule,
+    PaginatorModule,
   ],
   providers: [
     ApiService,

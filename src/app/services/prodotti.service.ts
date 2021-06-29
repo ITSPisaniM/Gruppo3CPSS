@@ -8,17 +8,17 @@ import { ApiService } from './api.service';
 })
 export class ProdottiService {
 
+  private rootI = 'prodotti/'
+
   constructor(
     private api: ApiService,
     ) {}
 
-  
-
   public getProdotti():Observable<any>{
-    return this.api.get('prodotti/list','');
+    return this.api.get(this.rootI + 'list','');
   }
 
   public getProdottiPagination(index:number, size:number): Observable<any> {
-    return this.api.get('prodotti/page/0/5', '');
+    return this.api.get(this.rootI + 'page?page=' + index + '&size=' + size , '');
   }
 }

@@ -1,5 +1,3 @@
-<mat-paginator [length]="length"
-               [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions"
-               (page)="sendPageSize(pageSize)">
-</mat-paginator>
+<p-paginator [rows]="pageSize" [totalRecords]="totalRecords" [rowsPerPageOptions]="pageSizeOptions"
+    (onPageChange)="onPageChange($event)"
+></p-paginator>
