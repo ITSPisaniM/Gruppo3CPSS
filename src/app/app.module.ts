@@ -29,6 +29,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, OrdiniComponent],
@@ -56,6 +58,8 @@ import { TokenInterceptor } from './auth/token.interceptor';
     MatCardModule,
     MatExpansionModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     ApiService,
@@ -68,6 +72,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
   ],
   bootstrap: [AppComponent],
 })
