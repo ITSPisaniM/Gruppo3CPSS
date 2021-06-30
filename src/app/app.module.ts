@@ -33,13 +33,19 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { OrdiniDettaglioComponent } from './pages/ordini/ordini-dettaglio/ordini-dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
+import { PaginatorComponent } from 'src/shared/paginator/paginator.component';
+import { ProdottiComponent } from './pages/prodotti/prodotti.component';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     OrdiniComponent,
     OrdiniDettaglioComponent,
+    ProdottiComponent,
+    PaginatorComponent,
+    DettaglioComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +73,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    PaginatorModule,
     MatDialogModule,
   ],
   providers: [
