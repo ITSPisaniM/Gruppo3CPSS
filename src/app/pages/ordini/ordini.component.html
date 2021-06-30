@@ -87,6 +87,12 @@
       <mat-icon aria-label="info" color="link">info</mat-icon>
     </button>
   </mat-card>
-  <mat-paginator class="paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]">
+  <mat-paginator
+    class="sticky bottom-0 z-50"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageEvent($event)"
+  >
   </mat-paginator>
 </div>

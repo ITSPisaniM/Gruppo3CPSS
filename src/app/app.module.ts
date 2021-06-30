@@ -23,7 +23,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthGuard } from './auth/auth.guard';
 import { CookieService } from 'ngx-cookie-service';
-import { OrdiniComponent } from './pages/ordini/ordini.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -37,6 +36,7 @@ import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.compone
 import { PaginatorComponent } from 'src/app/shared/paginator/paginator.component';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { OrdiniComponent } from './pages/ordini/ordini.component';
 @NgModule({
   declarations: [
     AppComponent,

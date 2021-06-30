@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Observable } from 'rxjs';
@@ -25,6 +25,9 @@ export class OrdiniComponent implements OnInit, OnDestroy {
   obs: Observable<any>;
   dataSource: MatTableDataSource<Ordine>;
   filterForm: FormGroup;
+  length: number;
+  pageSize: number;
+  pageSizeOptions: number[] = [2, 5, 10, 25, 100];
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -49,6 +52,7 @@ export class OrdiniComponent implements OnInit, OnDestroy {
       this.changeDetectorRef.detectChanges();
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
+      // set paginator settings
     });
   }
 
@@ -88,5 +92,11 @@ export class OrdiniComponent implements OnInit, OnDestroy {
     this.dialog.open(OrdiniDettaglioComponent, {
       data: ordine,
     });
+  }
+
+  pageEvent(event: PageEvent): void {
+    this.ordiniService
+      .getOrdiniPagination(event.pageIndex, event.pageSize)
+      .subscribe();
   }
 }
