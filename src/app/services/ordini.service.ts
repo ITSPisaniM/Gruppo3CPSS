@@ -16,7 +16,10 @@ export class OrdiniService {
   }
 
   public getOrdiniPagination(page: number, elements: number): Observable<any> {
-    return this.api.get(this.path + '/page/' + page + '/' + elements, '');
+    var params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', elements.toString());
+    return this.api.get(this.path + '/page', params);
   }
 
   public getByFilters(

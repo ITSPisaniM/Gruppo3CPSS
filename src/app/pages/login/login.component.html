@@ -1,59 +1,39 @@
-<div class="app-body">
-  <main class="main d-flex align-items-center">
-    <div class="container">
+<div class="container p-4">
+  <form [formGroup]="loginForm" ngNativeValidate>
+    <mat-card class="lgin">
+      <button *ngIf="wrongLogin" disableRipple mat-flat-button color="warn">
+        Username o password errati
+      </button>
       <div class="row">
-        <div class="card-group">
-          <div class="card p-4">
-            <div class="card-body">
-              <form [formGroup]="loginForm" ngNativeValidate>
-                <mat-card class="lgin">
-                  <button
-                    *ngIf="wrongLogin"
-                    disableRipple
-                    mat-flat-button
-                    color="warn"
-                  >
-                    Username o password errati
-                  </button>
-                  <div class="row">
-                    <mat-form-field appearance="standard">
-                      <mat-label>Username</mat-label>
-                      <input formControlName="username" matInput required />
-                      <mat-error *ngIf="loginForm.get('username').invalid">
-                        Valore richiesto
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="row">
-                    <mat-form-field appearance="standard">
-                      <mat-label>Password</mat-label>
-                      <input formControlName="password" matInput required />
-                      <mat-error *ngIf="loginForm.get('password').invalid">
-                        Valore richiesto
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <br />
-                  <div
-                    class="row"
-                    style="padding-top: 5px; padding-bottom: 5px"
-                  >
-                    <button
-                      type="submit"
-                      mat-flat-button
-                      color="primary"
-                      (click)="login()"
-                      [disabled]="loginForm.pristine || loginForm.invalid"
-                    >
-                      Login
-                    </button>
-                  </div>
-                </mat-card>
-              </form>
-            </div>
-          </div>
-        </div>
+        <mat-form-field appearance="standard">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput required />
+          <mat-error *ngIf="loginForm.get('username').invalid">
+            Valore richiesto
+          </mat-error>
+        </mat-form-field>
       </div>
-    </div>
-  </main>
+      <div class="row">
+        <mat-form-field appearance="standard">
+          <mat-label>Password</mat-label>
+          <input type="password" formControlName="password" matInput required />
+          <mat-error *ngIf="loginForm.get('password').invalid">
+            Valore richiesto
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <br />
+      <div class="row" class="py-1">
+        <button
+          type="submit"
+          mat-flat-button
+          color="primary"
+          (click)="login()"
+          [disabled]="loginForm.pristine || loginForm.invalid"
+        >
+          Login
+        </button>
+      </div>
+    </mat-card>
+  </form>
 </div>

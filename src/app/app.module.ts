@@ -34,7 +34,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { OrdiniDettaglioComponent } from './pages/ordini/ordini-dettaglio/ordini-dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
-import { PaginatorComponent } from 'src/shared/paginator/paginator.component';
+import { PaginatorComponent } from 'src/app/shared/paginator/paginator.component';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
