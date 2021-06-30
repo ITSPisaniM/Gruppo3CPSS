@@ -28,10 +28,12 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { PaginatorComponent } from '../shared/paginator/paginator.component';
 
 import {PaginatorModule} from 'primeng/paginator';
+import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent],
+  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent, DettaglioComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -51,6 +53,7 @@ import {PaginatorModule} from 'primeng/paginator';
     LayoutModule,
     MatFormFieldModule,
     PaginatorModule,
+    MatDialogModule,
   ],
   providers: [
     ApiService,

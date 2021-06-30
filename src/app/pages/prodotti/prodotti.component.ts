@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AppComponent } from 'src/app/app.component';
 import { ProdottiService } from 'src/app/services/prodotti.service';
+import { DettaglioComponent } from './dettaglio/dettaglio.component';
+import { Prodotto } from './dettaglio/prodotto';
+
 
 @Component({
   selector: 'app-prodotti',
@@ -11,6 +15,7 @@ export class ProdottiComponent implements OnInit {
 
   constructor(
     private prod:ProdottiService,
+    private dialog: MatDialog
   ) { }
 
   public listaProdotti;
@@ -38,6 +43,13 @@ export class ProdottiComponent implements OnInit {
       this.listaProdotti = res.data;
       console.log(this.listaProdotti);
     })
+  }
+
+  
+  openDettaglio(prodotto: Prodotto): void {
+    this.dialog.open(DettaglioComponent, {
+      data: prodotto,
+    });
   }
 
    ngOnInit(){ 
