@@ -31,9 +31,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { OrdiniDettaglioComponent } from './pages/ordini/ordini-dettaglio/ordini-dettaglio.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, OrdiniComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    OrdiniComponent,
+    OrdiniDettaglioComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -60,6 +67,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
   ],
   providers: [
     ApiService,

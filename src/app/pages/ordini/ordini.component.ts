@@ -6,23 +6,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Observable } from 'rxjs';
 import { OrdiniService } from 'src/app/services/ordini.service';
-
-export interface Ordine {
-  amazonOrderId: string;
-  buyerEmail: string;
-  purchaseDate: Date;
-  ordersItems: Prodotto[];
-}
-
-export interface Prodotto {
-  title: string;
-  asin: string;
-}
+import { OrdiniDettaglioComponent } from './ordini-dettaglio/ordini-dettaglio.component';
+import { Ordine } from './ordine';
 
 @Component({
   selector: 'app-ordini',
@@ -38,7 +29,8 @@ export class OrdiniComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private ordiniService: OrdiniService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -70,13 +62,9 @@ export class OrdiniComponent implements OnInit, OnDestroy {
     if (this.filterForm.valid) {
       this.ordiniService
         .getByFilters(
-          this.filterForm.get('amazonOrderId')
-            ? this.filterForm.get('amazonOrderId').value
-            : null,
-          this.filterForm.get('buyerEmail')
-            ? this.filterForm.get('buyerEmail').value
-            : null,
-          this.filterForm.get('purchaseDate') ? this.fixDate() : null
+          this.filterForm.get('amazonOrderId').value,
+          this.filterForm.get('buyerEmail').value,
+          this.filterForm.get('purchaseDate').value ? this.fixDate() : ''
         )
         .subscribe((res) => {
           this.dataSource = new MatTableDataSource<Ordine>(res.data);
@@ -96,5 +84,9 @@ export class OrdiniComponent implements OnInit, OnDestroy {
     return date.toISOString().split('T')[0];
   }
 
-  openDettaglio(): void {}
+  openDettaglio(ordine: Ordine): void {
+    this.dialog.open(OrdiniDettaglioComponent, {
+      data: ordine,
+    });
+  }
 }
