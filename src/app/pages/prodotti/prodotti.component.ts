@@ -10,24 +10,37 @@ import { ProdottiService } from 'src/app/services/prodotti.service';
 export class ProdottiComponent implements OnInit {
 
   constructor(
-    private pp:AppComponent,
     private prod:ProdottiService,
   ) { }
 
   public listaProdotti;
+  public nProdotti;
 
   //elementi da visualizzzare nella pagina
   private elPerPage : number;
   getElPerPage(value: number) {
     this.elPerPage = value;
-    this.prod.getProdottiPagination(0, this.elPerPage).subscribe((res)=>{
+    console.log("size: " + value)
+    this.myLazyLoad();
+ 
+  }
+  private index:number;
+  getIndex(value:number){
+    this.index = value;
+    console.log("index: " + value)
+    this.myLazyLoad();
+  }
+
+  async myLazyLoad(){
+    await this.elPerPage != null;
+    await this.index != null;
+    this.prod.getProdottiPagination(this.index, this.elPerPage).subscribe((res)=>{
       this.listaProdotti = res.data;
       console.log(this.listaProdotti);
     })
   }
 
-  ngOnInit(): void { 
-    
+   ngOnInit(){ 
   }
 
 

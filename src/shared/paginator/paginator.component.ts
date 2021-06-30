@@ -20,23 +20,25 @@ export class PaginatorComponent implements OnInit {
   totalRecords:any;
   //emitter per paginator....SIZE
   @Output() pageSizeEvent = new EventEmitter<number>()
-
-  sendPageSize(value: number) {
-    this.pageSizeEvent.emit(value);    
+  //emitter per paginator...INDEX
+  @Output() indexEvent = new EventEmitter<number>()
+  sendPageSize(r: number, i:number) {
+    this.pageSizeEvent.emit(r);   
+    this.indexEvent.emit(i); 
   }
 
-   //emitter per paginator...INDEX
-   @Output() indexEvent = new EventEmitter<number>()
-   sendindexPage(value: number) {
-     this.indexEvent.emit(value);
-   }
+  //  sendindexPage(value: number) {
+  //    this.indexEvent.emit(value);
+  //  }
 
   ngOnInit(): void {    
+    this.prod.getNumProdotti().subscribe((res)=>{
+      this.totalRecords = res;
+    })
     this.onPageChange(this.pageSize);
   }
   onPageChange(event){
-    this.sendPageSize(event.rows);
-    
+    this.sendPageSize(event.rows,event.page);
   }
 
 }

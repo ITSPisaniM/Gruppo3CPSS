@@ -18,6 +18,10 @@ export class ProdottiService {
     return this.api.get(this.rootI + 'list','');
   }
 
+  public getNumProdotti():Observable<any>{
+    return this.api.get(this.rootI + 'count','');
+  }
+
   public getProdottiPagination(index:number, size:number): Observable<any> {
     return this.api.get(this.rootI + 'page?page=' + index + '&size=' + size , '');
   }
