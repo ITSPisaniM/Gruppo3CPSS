@@ -36,6 +36,8 @@ import { ProdottiDettaglioComponent } from './pages/prodotti/prodotti-dettaglio/
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { OrdiniComponent } from './pages/ordini/ordini.component';
+import { ChartsModule } from 'ng2-charts';
+import { AnalisiComponent } from './pages/analisi/analisi.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { OrdiniComponent } from './pages/ordini/ordini.component';
     OrdiniDettaglioComponent,
     ProdottiComponent,
     ProdottiDettaglioComponent,
+    AnalisiComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { OrdiniComponent } from './pages/ordini/ordini.component';
     MatNativeDateModule,
     PaginatorModule,
     MatDialogModule,
+    ChartsModule,
   ],
   providers: [
     ApiService,
