@@ -31,6 +31,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { CarrelloComponent } from './pages/carrello/carrello.component';
     MatFormFieldModule,
     PaginatorModule,
     MatDialogModule,
+    ScrollingModule,
   ],
   providers: [
     ApiService,

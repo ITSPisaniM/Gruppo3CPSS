@@ -1,5 +1,34 @@
 <h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+<div class="grid gap-2 grid-cols-2 p-8">
+  <div mat-dialog-content *ngFor="let item of elementiCarrello">
+    <mat-card-content>
+
+      <p>
+        ASIN: {{item.prodotto.asin}}
+      </p>
+      <p>
+        title: {{item.prodotto.title}}
+      </p>
+      <p>
+        category: {{item.prodotto.category}}
+      </p>
+      <p>
+        price: {{item.prodotto.price}}
+      </p>
+      <p>
+        stock: {{item.prodotto.stock}}
+      </p>
+      <p>
+        brand: {{item.prodotto.brand}}
+      </p>
+      <p>
+        quantità: {{item.qta}}
+      </p>
+
+    </mat-card-content>
+  </div>
+</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="svuota()">Svuota</button>
 </div>

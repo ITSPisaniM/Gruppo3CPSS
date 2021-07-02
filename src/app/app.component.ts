@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { AuthenticationService } from './auth/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
+import { ProdottoDaComprare } from './pages/prodotti/ProdottoDaComprare';
 
 @Component({
   selector: 'app-root',
@@ -39,7 +40,13 @@ export class AppComponent implements OnInit {
   }
 
   openCarrello(){
-    console.log("pisello");
     this.dialog.open(CarrelloComponent);
+  }
+
+  private elDaComprare: ProdottoDaComprare[];
+  getElDaComprare(value: any){
+    console.log(value + "sa");
+    
+    this.elDaComprare.push(value);
   }
 }
