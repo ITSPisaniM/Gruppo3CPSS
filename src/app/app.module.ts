@@ -30,10 +30,16 @@ import { PaginatorComponent } from '../shared/paginator/paginator.component';
 import {PaginatorModule} from 'primeng/paginator';
 import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AcquistiComponent } from './pages/acquisti/acquisti.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule, } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent, DettaglioComponent],
+  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent, DettaglioComponent, AcquistiComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -54,6 +60,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     PaginatorModule,
     MatDialogModule,
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
   providers: [
     ApiService,
@@ -66,6 +76,7 @@ import { MatDialogModule } from '@angular/material/dialog';
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
   ],
   bootstrap: [AppComponent],
 })
