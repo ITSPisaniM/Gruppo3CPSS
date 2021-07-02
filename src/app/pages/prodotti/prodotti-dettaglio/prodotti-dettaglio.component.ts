@@ -3,15 +3,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Prodotto } from './prodotto';
 
 @Component({
-  selector: 'app-dettaglio',
-  templateUrl: './dettaglio.component.html',
-  styleUrls: ['./dettaglio.component.scss']
+  selector: 'app-prodotti-dettaglio',
+  templateUrl: './prodotti-dettaglio.component.html',
+  styleUrls: ['./prodotti-dettaglio.component.scss'],
 })
-export class DettaglioComponent implements OnInit {
-
+export class ProdottiDettaglioComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public prodotto: Prodotto) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

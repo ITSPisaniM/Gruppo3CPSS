@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private location: Location,
-    private authservice: AuthenticationService
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -32,6 +32,6 @@ export class AppComponent implements OnInit {
 
   public logout(): void {
     this.loginPage = true;
-    this.authservice.logOut();
+    this.authService.logOut();
   }
 }

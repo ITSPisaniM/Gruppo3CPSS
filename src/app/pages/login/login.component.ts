@@ -47,7 +47,7 @@ export class LoginComponent {
       };
       this.auth.login(loginContext).subscribe(
         (res) => {
-          this.router.navigate(['/prodotti'], { replaceUrl: true });
+          this.router.navigate(['/ordini'], { replaceUrl: true });
           this.pp.loginPage = false;
         },
         (error) => {

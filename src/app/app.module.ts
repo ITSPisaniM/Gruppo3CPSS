@@ -23,17 +23,28 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthGuard } from './auth/auth.guard';
 import { CookieService } from 'ngx-cookie-service';
-import { ProdottiComponent } from './pages/prodotti/prodotti.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { TokenInterceptor } from './auth/token.interceptor';
-import { PaginatorComponent } from '../shared/paginator/paginator.component';
-
-import {PaginatorModule} from 'primeng/paginator';
-import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { OrdiniDettaglioComponent } from './pages/ordini/ordini-dettaglio/ordini-dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
+import { ProdottiDettaglioComponent } from './pages/prodotti/prodotti-dettaglio/prodotti-dettaglio.component';
+import { ProdottiComponent } from './pages/prodotti/prodotti.component';
+import { PaginatorModule } from 'primeng/paginator';
+import { OrdiniComponent } from './pages/ordini/ordini.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent, DettaglioComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    OrdiniComponent,
+    OrdiniDettaglioComponent,
+    ProdottiComponent,
+    ProdottiDettaglioComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,6 +63,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     LayoutModule,
     MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCardModule,
+    MatExpansionModule,
+    HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     PaginatorModule,
     MatDialogModule,
   ],
@@ -66,6 +85,7 @@ import { MatDialogModule } from '@angular/material/dialog';
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
   ],
   bootstrap: [AppComponent],
 })
