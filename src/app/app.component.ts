@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { AuthenticationService } from './auth/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CarrelloComponent } from './pages/carrello/carrello.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,8 @@ export class AppComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private location: Location,
-    private authservice: AuthenticationService
+    private authservice: AuthenticationService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -33,5 +36,10 @@ export class AppComponent implements OnInit {
   public logout(): void {
     this.loginPage = true;
     this.authservice.logOut();
+  }
+
+  openCarrello(){
+    console.log("pisello");
+    this.dialog.open(CarrelloComponent);
   }
 }

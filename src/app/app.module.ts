@@ -30,10 +30,11 @@ import { PaginatorComponent } from '../shared/paginator/paginator.component';
 import {PaginatorModule} from 'primeng/paginator';
 import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CarrelloComponent } from './pages/carrello/carrello.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent, DettaglioComponent],
+  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent, DettaglioComponent, CarrelloComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

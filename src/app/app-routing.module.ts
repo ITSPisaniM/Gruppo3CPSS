@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AppComponent } from './app.component';
 import { AuthenticationGuard } from './auth/authentication.guard';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
+import { CarrelloComponent } from './pages/carrello/carrello.component';
 
 const routes: Routes = [
   {
@@ -15,11 +16,17 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-  },{
+  },
+  {
     path: 'prodotti',
     component: ProdottiComponent,
     canActivate: [AuthenticationGuard],
   },
+  {
+    path: 'carrello',
+    component: CarrelloComponent,
+    canActivate: [AuthenticationGuard],
+  }
 ];
 
 @NgModule({
