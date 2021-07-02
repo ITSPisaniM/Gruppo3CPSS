@@ -15,10 +15,10 @@ export class OrdiniService {
     return this.api.get(this.path + '/list', '');
   }
 
-  public getOrdiniPagination(page: number, elements: number): Observable<any> {
+  public getOrdiniPagination(page: number, elements?: number): Observable<any> {
     var params = new HttpParams()
       .set('page', page.toString())
-      .set('size', elements.toString());
+      .set('size', elements?.toString() || '');
     return this.api.get(this.path + '/page', params);
   }
 

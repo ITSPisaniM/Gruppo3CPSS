@@ -20,7 +20,11 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content role="region">
-    <mat-toolbar *ngIf="!loginPage" color="primary" class="mat-elevation-z6">
+    <mat-toolbar
+      *ngIf="!loginPage"
+      color="primary"
+      class="mat-elevation-z6 z-50 top-0 fixed"
+    >
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -63,6 +67,7 @@
         <mat-icon aria-label="logout" (click)="logout()">logout</mat-icon>
       </button>
     </mat-toolbar>
+    <div class="pt-10"></div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

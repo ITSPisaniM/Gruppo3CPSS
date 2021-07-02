@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { OrdiniService } from 'src/app/services/ordini.service';
 import { OrdiniDettaglioComponent } from './ordini-dettaglio/ordini-dettaglio.component';
 import { Ordine } from './ordine';
+import { Page } from './page';
 
 @Component({
   selector: 'app-ordini',
@@ -26,8 +27,8 @@ export class OrdiniComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Ordine>;
   filterForm: FormGroup;
   length: number;
-  pageSize: number;
-  pageSizeOptions: number[] = [2, 5, 10, 25, 100];
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 25, 100];
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -45,15 +46,19 @@ export class OrdiniComponent implements OnInit, OnDestroy {
     this.getAll();
   }
 
+  populateTable(ordini: Ordine[], elementiTotali: number): void {
+    this.dataSource = new MatTableDataSource<Ordine>(ordini);
+    this.changeDetectorRef.detectChanges();
+    this.obs = this.dataSource.connect();
+    this.length = elementiTotali;
+  }
+
   getAll(): void {
-    this.ordiniService.getOrdini().subscribe((res) => {
-      console.log(res.data);
-      this.dataSource = new MatTableDataSource<Ordine>(res.data);
-      this.changeDetectorRef.detectChanges();
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-      // set paginator settings
-    });
+    this.ordiniService
+      .getOrdiniPagination(0, this.pageSize)
+      .subscribe((res: Page<Ordine[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements);
+      });
   }
 
   ngOnDestroy(): void {
@@ -71,10 +76,7 @@ export class OrdiniComponent implements OnInit, OnDestroy {
           this.filterForm.get('purchaseDate').value ? this.fixDate() : ''
         )
         .subscribe((res) => {
-          this.dataSource = new MatTableDataSource<Ordine>(res.data);
-          this.changeDetectorRef.detectChanges();
-          this.dataSource.paginator = this.paginator;
-          this.obs = this.dataSource.connect();
+          this.populateTable(res.data, res.data.totalElements);
         });
     } else {
       this.getAll();
@@ -97,6 +99,8 @@ export class OrdiniComponent implements OnInit, OnDestroy {
   pageEvent(event: PageEvent): void {
     this.ordiniService
       .getOrdiniPagination(event.pageIndex, event.pageSize)
-      .subscribe();
+      .subscribe((res: Page<Ordine[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements);
+      });
   }
 }

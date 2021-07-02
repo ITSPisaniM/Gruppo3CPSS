@@ -32,7 +32,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { OrdiniDettaglioComponent } from './pages/ordini/ordini-dettaglio/ordini-dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.component';
+import { ProdottiDettaglioComponent } from './pages/prodotti/prodotti-dettaglio/prodotti-dettaglio.component';
 import { PaginatorComponent } from 'src/app/shared/paginator/paginator.component';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { PaginatorModule } from 'primeng/paginator';
@@ -45,7 +45,7 @@ import { OrdiniComponent } from './pages/ordini/ordini.component';
     OrdiniDettaglioComponent,
     ProdottiComponent,
     PaginatorComponent,
-    DettaglioComponent,
+    ProdottiDettaglioComponent,
   ],
   imports: [
     BrowserModule,

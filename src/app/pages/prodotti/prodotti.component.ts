@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AppComponent } from 'src/app/app.component';
 import { ProdottiService } from 'src/app/services/prodotti.service';
-import { DettaglioComponent } from './dettaglio/dettaglio.component';
-import { Prodotto } from './dettaglio/prodotto';
+import { ProdottiDettaglioComponent } from './prodotti-dettaglio/prodotti-dettaglio.component';
+import { Prodotto } from './prodotti-dettaglio/prodotto';
 
 @Component({
   selector: 'app-prodotti',
@@ -42,7 +41,7 @@ export class ProdottiComponent implements OnInit {
   }
 
   openDettaglio(prodotto: Prodotto): void {
-    this.dialog.open(DettaglioComponent, {
+    this.dialog.open(ProdottiDettaglioComponent, {
       data: prodotto,
     });
   }
