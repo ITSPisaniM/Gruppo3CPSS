@@ -28,8 +28,12 @@
     </mat-card-actions>
   </mat-card>
 </div>
-<app-paginator
-  (pageSizeEvent)="getElPerPage($event)"
-  (indexEvent)="getIndex($event)"
-  root="prodotti"
-></app-paginator>
+<div class="pb-10"></div>
+<mat-paginator
+  class="w-full fixed bottom-0"
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="pageEvent($event)"
+>
+</mat-paginator>

@@ -33,7 +33,6 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { OrdiniDettaglioComponent } from './pages/ordini/ordini-dettaglio/ordini-dettaglio.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProdottiDettaglioComponent } from './pages/prodotti/prodotti-dettaglio/prodotti-dettaglio.component';
-import { PaginatorComponent } from 'src/app/shared/paginator/paginator.component';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { OrdiniComponent } from './pages/ordini/ordini.component';
@@ -44,7 +43,6 @@ import { OrdiniComponent } from './pages/ordini/ordini.component';
     OrdiniComponent,
     OrdiniDettaglioComponent,
     ProdottiComponent,
-    PaginatorComponent,
     ProdottiDettaglioComponent,
   ],
   imports: [

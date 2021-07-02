@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProdottiService } from 'src/app/services/prodotti.service';
+import { Page } from '../ordini/page';
 import { ProdottiDettaglioComponent } from './prodotti-dettaglio/prodotti-dettaglio.component';
 import { Prodotto } from './prodotti-dettaglio/prodotto';
 
@@ -10,34 +12,21 @@ import { Prodotto } from './prodotti-dettaglio/prodotto';
   styleUrls: ['./prodotti.component.scss'],
 })
 export class ProdottiComponent implements OnInit {
-  constructor(private prod: ProdottiService, private dialog: MatDialog) {}
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  listaProdotti: Prodotto[];
+  nProdotti: number;
+  length: number;
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 25, 100];
 
-  public listaProdotti;
-  public nProdotti;
+  constructor(
+    private prodottiService: ProdottiService,
+    private dialog: MatDialog
+  ) {}
 
-  //elementi da visualizzzare nella pagina
-  private elPerPage: number;
-  getElPerPage(value: number) {
-    this.elPerPage = value;
-    console.log('size: ' + value);
-    this.myLazyLoad();
-  }
-  private index: number;
-  getIndex(value: number) {
-    this.index = value;
-    console.log('index: ' + value);
-    this.myLazyLoad();
-  }
-
-  async myLazyLoad() {
-    (await this.elPerPage) != null;
-    (await this.index) != null;
-    this.prod
-      .getProdottiPagination(this.index, this.elPerPage)
-      .subscribe((res) => {
-        this.listaProdotti = res.data;
-        console.log(this.listaProdotti);
-      });
+  populateTable(prodotti: Prodotto[], elementiTotali: number) {
+    this.listaProdotti = prodotti;
+    this.length = elementiTotali;
   }
 
   openDettaglio(prodotto: Prodotto): void {
@@ -46,5 +35,19 @@ export class ProdottiComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  pageEvent(event: PageEvent): void {
+    this.prodottiService
+      .getProdottiPagination(event.pageIndex, event.pageSize)
+      .subscribe((res: Page<Prodotto[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements);
+      });
+  }
+
+  ngOnInit() {
+    this.prodottiService
+      .getProdottiPagination(0, this.pageSize)
+      .subscribe((res: Page<Prodotto[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements);
+      });
+  }
 }
