@@ -36,6 +36,10 @@ import { ProdottiDettaglioComponent } from './pages/prodotti/prodotti-dettaglio/
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { OrdiniComponent } from './pages/ordini/ordini.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { AcquistiComponent } from './pages/acquisti/acquisti.component';
+import { DettaglioComponent } from './pages/acquisti/dettaglio/dettaglio.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +48,8 @@ import { OrdiniComponent } from './pages/ordini/ordini.component';
     OrdiniDettaglioComponent,
     ProdottiComponent,
     ProdottiDettaglioComponent,
+    AcquistiComponent,
+    DettaglioComponent,
   ],
   imports: [
     BrowserModule,

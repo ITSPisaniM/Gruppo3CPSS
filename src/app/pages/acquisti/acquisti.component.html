@@ -70,9 +70,11 @@
             </mat-expansion-panel-header>
             <!--Lista oggetti-->
             <mat-list role="list">
-              <div *ngFor="let item of card.ordersItems">
+              <div *ngFor="let item of card.acquistiProdotti">
                 <mat-list-item role="listitem">
-                  {{ item.supplierId }} {{ item.billNumber }} 
+                  <p>ASIN: {{ item.asin }} </p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <p>price: {{ item.unitPrice }} </p>
                 </mat-list-item>
                 <mat-divider></mat-divider>
               </div>
@@ -88,7 +90,7 @@
       </button>
     </mat-card>
     <mat-paginator
-      class="sticky bottom-0 z-50"
+      class="w-full fixed bottom-0"
       [length]="length"
       [pageSize]="pageSize"
       [pageSizeOptions]="pageSizeOptions"

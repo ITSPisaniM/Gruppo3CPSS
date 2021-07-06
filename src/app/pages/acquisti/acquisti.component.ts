@@ -94,12 +94,12 @@ export class AcquistiComponent implements OnInit {
 
   getElPagination(index: number, size:number){
     this.acquistiService.getAcquistiPagination(index, size).subscribe((res)=>{
-      this.listaAcquisti = res.data;
+      this.listaAcquisti = res.data.content;
       this.dataSource = new MatTableDataSource<Acquisto>(this.listaAcquisti);
       this.changeDetectorRef.detectChanges();
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();  
-      console.log("obs", this.obs);    
+      console.log("lis", this.listaAcquisti);    
     });
   }
 
