@@ -98,7 +98,8 @@ export class AcquistiComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Acquisto>(this.listaAcquisti);
       this.changeDetectorRef.detectChanges();
       this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();      
+      this.obs = this.dataSource.connect();  
+      console.log("obs", this.obs);    
     });
   }
 
