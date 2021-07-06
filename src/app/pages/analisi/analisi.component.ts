@@ -6,13 +6,15 @@ import {
   MatDateRangeSelectionStrategy,
   MAT_DATE_RANGE_SELECTION_STRATEGY,
 } from '@angular/material/datepicker';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AnalisiService } from 'src/app/services/analisi.service';
+import { CommonsService } from 'src/app/services/commons.service';
 import { ProdottiService } from 'src/app/services/prodotti.service';
-import { Prodotto } from '../prodotti/prodotti-dettaglio/prodotto';
-import { Day } from './day';
+import { Prodotto } from '../../models/prodotto';
+import { Day } from '../../models/day';
+import { BaseResponse } from 'src/app/models/spring-response';
 
 @Injectable()
 export class FiveDayRangeSelectionStrategy<D>
@@ -117,23 +119,26 @@ export class AnalisiComponent implements OnInit {
 
   constructor(
     private analisiService: AnalisiService,
-    private prodottiService: ProdottiService
+    private prodottiService: ProdottiService,
+    private commons: CommonsService
   ) {}
 
   //Inizializzazione
   ngOnInit(): void {
     //Prendi prodotti per autocomplete
-    this.prodottiService.getProdotti().subscribe((res) => {
-      res.data.forEach((item: Prodotto) => {
-        var sItem = {
-          title: item.title,
-          asin: item.asin,
-        };
-        this.itemList.push(sItem);
+    this.prodottiService
+      .getProdotti()
+      .subscribe((res: BaseResponse<Prodotto[]>) => {
+        res.data.forEach((item: Prodotto) => {
+          var sItem = {
+            title: item.title,
+            asin: item.asin,
+          };
+          this.itemList.push(sItem);
+        });
+        //Inizializzazione grafico a linee
+        this.searchLine(d.toISOString(), this.itemList[0].asin);
       });
-      //Inizializzazione grafico a linee
-      this.searchLine(d.toISOString(), this.itemList[0].asin);
-    });
     // Funzione per autocomplete
     this.filteredItemlist = this.rangeLine.get('item').valueChanges.pipe(
       startWith(''),
@@ -147,12 +152,16 @@ export class AnalisiComponent implements OnInit {
 
   // Ricerca grafico a barre
   public searchBar(date?: string): void {
+    // Reset
     this.barChartLabels.length = 0;
     this.barChartData[0].data.length = 0;
     this.barChartData[1].data.length = 0;
+
     this.analisiService
-      .getTotQandR(this.fixDate(date || this.rangeBar.get('start').value))
-      .subscribe((res) => {
+      .getTotQandR(
+        this.commons.fixDate(date || this.rangeBar.get('start').value)
+      )
+      .subscribe((res: BaseResponse<Day[]>) => {
         res.data.forEach((day: Day) => {
           this.barChartLabels.push(day.startDate.split('T')[0]);
           this.barChartData[0].data.push(day.quantitaTot);
@@ -164,12 +173,14 @@ export class AnalisiComponent implements OnInit {
 
   //Ricerca grafico a linee
   public searchLine(date?: string, asin?: string): void {
+    //Reset
     this.lineChartLabels.length = 0;
     this.lineChartData[0].data.length = 0;
     this.lineChartData[1].data.length = 0;
+
     this.analisiService
       .getTotQandRperItem(
-        this.fixDate(date || this.rangeLine.get('start').value),
+        this.commons.fixDate(date || this.rangeLine.get('start').value),
         asin || this.rangeLine.get('item').value
       )
       .subscribe((res) => {
@@ -179,14 +190,6 @@ export class AnalisiComponent implements OnInit {
           this.lineChartData[1].data.push(day.ricaviTot);
         });
       });
-  }
-
-  // Fix per le date da inviare al database
-  fixDate(dateToFix: string): string {
-    var date = new Date(dateToFix);
-    date.setTime(date.getTime() + 2 * 60 * 60 * 1000);
-
-    return date.toISOString().split('T')[0];
   }
 
   // Funzione di filtro per l'autocomplete

@@ -1,6 +1,6 @@
-export interface Page<Type> {
+export interface Page<T> {
   data: {
-    content: Type;
+    content: T;
     pageable: {
       sort: {
         unsorted: boolean;

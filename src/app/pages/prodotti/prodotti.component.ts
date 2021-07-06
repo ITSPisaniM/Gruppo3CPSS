@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProdottiService } from 'src/app/services/prodotti.service';
-import { Page } from '../ordini/page';
+import { Page } from '../../models/page';
 import { ProdottiDettaglioComponent } from './prodotti-dettaglio/prodotti-dettaglio.component';
-import { Prodotto } from './prodotti-dettaglio/prodotto';
+import { Prodotto } from '../../models/prodotto';
 
 @Component({
   selector: 'app-prodotti',
