@@ -1,12 +1,112 @@
 <div class="pt-16 px-20">
-  <mat-expansion-panel>
+  <!--Totale quantità e ricavi-->
+  <mat-expansion-panel expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title class="justify-center">
-        Totale quantità e ricavi
+        Totale quantità e ricavi per settimana
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="block">
-      <canvas id="totqer"> </canvas>
+    <div class="block relative">
+      <form class="flex" [formGroup]="rangeBar">
+        <mat-form-field appearance="fill">
+          <mat-label>Seleziona una data</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input
+              matStartDate
+              matInput
+              formControlName="start"
+              placeholder="Data di inizio"
+            />
+            <input
+              matEndDate
+              matInput
+              formControlName="end"
+              placeholder="Data di fine"
+            />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <span class="px-2"></span>
+        <button mat-mini-fab type="submit" (click)="searchBar()">
+          <mat-icon aria-label="search">search</mat-icon>
+        </button>
+      </form>
+      <canvas
+        baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        chartType="bar"
+      ></canvas>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel expanded="false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="justify-center">
+        Totale quantità e ricavi per categoria
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="block relative">
+      <form class="flex" [formGroup]="rangeLine">
+        <mat-form-field appearance="fill">
+          <mat-label>Seleziona una data</mat-label>
+          <mat-date-range-input [rangePicker]="picker1">
+            <input
+              matStartDate
+              matInput
+              formControlName="start"
+              placeholder="Data di inizio"
+            />
+            <input
+              matEndDate
+              matInput
+              formControlName="end"
+              placeholder="Data di fine"
+            />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker1></mat-date-range-picker>
+        </mat-form-field>
+        <span class="flex-auto"></span>
+        <mat-form-field appearance="fill">
+          <mat-label>Prodotto</mat-label>
+          <input
+            type="text"
+            placeholder="Inserisci"
+            aria-label="Prodotto"
+            matInput
+            formControlName="item"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let item of filteredItemlist | async"
+              [value]="item.asin"
+            >
+              <span>{{ item.title }}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-mini-fab type="submit" (click)="searchLine()">
+          <mat-icon aria-label="search">search</mat-icon>
+        </button>
+      </form>
+      <canvas
+        baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [legend]="lineChartLegend"
+        chartType="line"
+      ></canvas>
     </div>
   </mat-expansion-panel>
 </div>
