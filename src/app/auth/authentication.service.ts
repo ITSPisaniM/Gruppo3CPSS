@@ -70,7 +70,7 @@ export class AuthenticationService {
 
   isAuthenticated(): boolean {
     try {
-      if (this.cookie.get('token').length > 0) {
+      if (this.cookie.check('token')) {
         this.token = true;
       } else {
         this.token = false;
