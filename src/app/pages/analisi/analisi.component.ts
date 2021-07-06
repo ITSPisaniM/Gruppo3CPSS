@@ -51,20 +51,23 @@ export class FiveDayRangeSelectionStrategy<D>
   ],
 })
 export class AnalisiComponent implements OnInit {
+  // Filtro autocomplete
   itemList: any[] = [];
   filteredItemlist: Observable<any[]>;
+
+  //Form
   rangeBar = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
   });
-
   rangeLine = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
     item: new FormControl(),
   });
 
-  public barChartOptions: ChartOptions = {
+  //Common chart
+  public chartOptions: ChartOptions = {
     responsive: true,
     aspectRatio: 3,
     scales: {
@@ -74,8 +77,10 @@ export class AnalisiComponent implements OnInit {
       ],
     },
   };
+  public chartLegend: boolean = false;
+
+  //Bar Chart
   public barChartLabels: string[] = [];
-  public barChartLegend = false;
   public barChartData: ChartDataSets[] = [
     {
       data: [],
@@ -91,15 +96,23 @@ export class AnalisiComponent implements OnInit {
     },
   ];
 
-  public lineChartOptions: ChartOptions = {
-    responsive: true,
-    aspectRatio: 3,
-  };
+  //Line Chart
   public lineChartLabels: string[] = [];
-  public lineChartLegend = false;
   public lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Quantità' },
-    { data: [], label: 'Ricavi' },
+    {
+      data: [],
+      label: 'Quantità',
+      fill: false,
+      hoverBackgroundColor: '#805194',
+      borderColor: '#7B1FA2',
+    },
+    {
+      data: [],
+      label: 'Ricavi',
+      fill: false,
+      hoverBackgroundColor: '#b8f2d6',
+      borderColor: '#69F0AE',
+    },
   ];
 
   constructor(
@@ -107,7 +120,9 @@ export class AnalisiComponent implements OnInit {
     private prodottiService: ProdottiService
   ) {}
 
+  //Inizializzazione
   ngOnInit(): void {
+    //Prendi prodotti per autocomplete
     this.prodottiService.getProdotti().subscribe((res) => {
       res.data.forEach((item: Prodotto) => {
         var sItem = {
@@ -116,18 +131,25 @@ export class AnalisiComponent implements OnInit {
         };
         this.itemList.push(sItem);
       });
+      //Inizializzazione grafico a linee
+      this.searchLine(d.toISOString(), this.itemList[0].asin);
     });
+    // Funzione per autocomplete
     this.filteredItemlist = this.rangeLine.get('item').valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value))
     );
+    // Inizializzazione grafico a barre
     var d = new Date();
     d.setDate(d.getDate() - 7);
     this.searchBar(d.toISOString());
   }
 
+  // Ricerca grafico a barre
   public searchBar(date?: string): void {
     this.barChartLabels.length = 0;
+    this.barChartData[0].data.length = 0;
+    this.barChartData[1].data.length = 0;
     this.analisiService
       .getTotQandR(this.fixDate(date || this.rangeBar.get('start').value))
       .subscribe((res) => {
@@ -137,10 +159,14 @@ export class AnalisiComponent implements OnInit {
           this.barChartData[1].data.push(day.ricaviTot);
         });
       });
+    console.log(this.barChartData[0].data);
   }
 
+  //Ricerca grafico a linee
   public searchLine(date?: string, asin?: string): void {
     this.lineChartLabels.length = 0;
+    this.lineChartData[0].data.length = 0;
+    this.lineChartData[1].data.length = 0;
     this.analisiService
       .getTotQandRperItem(
         this.fixDate(date || this.rangeLine.get('start').value),
@@ -148,7 +174,6 @@ export class AnalisiComponent implements OnInit {
       )
       .subscribe((res) => {
         res.data.forEach((day: Day) => {
-          console.log(day);
           this.lineChartLabels.push(day.startDate.split('T')[0]);
           this.lineChartData[0].data.push(day.quantitaTot);
           this.lineChartData[1].data.push(day.ricaviTot);
@@ -156,6 +181,7 @@ export class AnalisiComponent implements OnInit {
       });
   }
 
+  // Fix per le date da inviare al database
   fixDate(dateToFix: string): string {
     var date = new Date(dateToFix);
     date.setTime(date.getTime() + 2 * 60 * 60 * 1000);
@@ -163,6 +189,7 @@ export class AnalisiComponent implements OnInit {
     return date.toISOString().split('T')[0];
   }
 
+  // Funzione di filtro per l'autocomplete
   private _filter(value: string): Prodotto[] {
     const filterValue = value.toLowerCase();
     return this.itemList.filter((item) =>
