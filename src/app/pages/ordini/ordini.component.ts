@@ -13,8 +13,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { OrdiniService } from 'src/app/services/ordini.service';
 import { OrdiniDettaglioComponent } from './ordini-dettaglio/ordini-dettaglio.component';
-import { Ordine } from './ordine';
-import { Page } from './page';
+import { Page } from '../../models/page';
+import { Ordine } from 'src/app/models/ordine';
+import { CommonsService } from 'src/app/services/commons.service';
 
 @Component({
   selector: 'app-ordini',
@@ -34,7 +35,8 @@ export class OrdiniComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private ordiniService: OrdiniService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private commons: CommonsService
   ) {}
 
   ngOnInit(): void {
@@ -73,21 +75,16 @@ export class OrdiniComponent implements OnInit, OnDestroy {
         .getByFilters(
           this.filterForm.get('amazonOrderId').value,
           this.filterForm.get('buyerEmail').value,
-          this.filterForm.get('purchaseDate').value ? this.fixDate() : ''
+          this.filterForm.get('purchaseDate').value
+            ? this.commons.fixDate(this.filterForm.get('purchaseDate').value)
+            : ''
         )
-        .subscribe((res) => {
-          this.populateTable(res.data, res.data.totalElements);
+        .subscribe((res: Page<Ordine[]>) => {
+          this.populateTable(res.data.content, res.data.totalElements);
         });
     } else {
       this.getAll();
     }
-  }
-
-  fixDate(): string {
-    var date = new Date(this.filterForm.get('purchaseDate').value);
-    date.setTime(date.getTime() + 2 * 60 * 60 * 1000);
-
-    return date.toISOString().split('T')[0];
   }
 
   openDettaglio(ordine: Ordine): void {

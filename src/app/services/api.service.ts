@@ -41,7 +41,7 @@ export class ApiService {
     }
   }
 
-  public get(path: string, params: any): Observable<any> {
+  public get(path: string, params?: any): Observable<any> {
     let Headers = new HttpHeaders();
     Headers.set('Content-Type', 'application/x-www-form-urlencoded');
     Headers.set('Accept', 'application/json');
@@ -60,12 +60,12 @@ export class ApiService {
       );
   }
 
-  public post(path: string, setting: any): Observable<any> {
+  public post(path: string, body: any): Observable<any> {
     let Headers = new HttpHeaders();
     Headers.set('Content-Type', 'application/json');
 
     return this.http
-      .post(this.host + '/' + path, setting, {
+      .post(this.host + '/' + path, body, {
         headers: Headers,
         withCredentials: false,
       })
