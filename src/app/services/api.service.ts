@@ -8,7 +8,7 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class ApiService {
   //host server
-  private readonly host = 'http://localhost:8080/api';
+  private readonly host = 'http://localhost:8090/api';
   constructor(private http: HttpClient) {}
 
   private formatErrors(error: any) {
