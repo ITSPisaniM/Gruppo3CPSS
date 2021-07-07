@@ -1,7 +1,7 @@
 import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CarrelloService } from 'src/app/services/carrello.service';
-import { ProdottoDaComprare } from '../prodotti/ProdottoDaComprare';
+import { ProdottoDaComprare } from '../../models/ProdottoDaComprare';
 
 @Component({
   selector: 'app-carrello',

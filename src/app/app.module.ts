@@ -39,16 +39,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
-
-@NgModule({
-  declarations: [AppComponent, LoginComponent, ProdottiComponent, PaginatorComponent, DettaglioComponent, CarrelloComponent],
 import { ProdottiDettaglioComponent } from './pages/prodotti/prodotti-dettaglio/prodotti-dettaglio.component';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { OrdiniComponent } from './pages/ordini/ordini.component';
 import { ChartsModule } from 'ng2-charts';
 import { AnalisiComponent } from './pages/analisi/analisi.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -70,7 +65,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
@@ -78,6 +72,7 @@ import '@angular/common/locales/global/it';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { AcquistiComponent } from './pages/acquisti/acquisti.component';
 import { AcquistiDettaglioComponent } from './pages/acquisti/acquisti-dettaglio/acquisti-dettaglio.component';
+
 
 @NgModule({
   declarations: [
@@ -90,6 +85,7 @@ import { AcquistiDettaglioComponent } from './pages/acquisti/acquisti-dettaglio/
     AnalisiComponent,
     AcquistiComponent,
     AcquistiDettaglioComponent,
+    CarrelloComponent
   ],
   imports: [
     BrowserModule,

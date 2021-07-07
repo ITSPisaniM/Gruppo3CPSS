@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { AuthenticationService } from './auth/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
-import { ProdottoDaComprare } from './pages/prodotti/ProdottoDaComprare';
+import { ProdottoDaComprare } from './models/ProdottoDaComprare';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
   public logout(): void {
     this.loginPage = true;
-    this.authService.logOut();
+    this.authservice.logOut();
   }
 
   openCarrello(){

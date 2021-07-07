@@ -1,4 +1,5 @@
-import { Prodotto } from "./dettaglio/prodotto";
+import { Prodotto } from "./prodotto";
+
 
 export interface ProdottoDaComprare {
     prodotto: Prodotto;
