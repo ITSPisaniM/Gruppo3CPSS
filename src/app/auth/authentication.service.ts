@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { of as observableOf, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CookieService } from 'ngx-cookie-service';
-import { AppComponent } from '../app.component';
 
 export interface Credentials {
   // Customize received credentials here
@@ -29,10 +28,7 @@ export class AuthenticationService {
 
   public token: boolean = false;
 
-  private _role: string;
-  private _username: string;
   private _credentials: string;
-  private _features: any = null;
 
   constructor(
     private router: Router,
@@ -48,8 +44,6 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(context: LoginContext): Observable<any> {
-    let bodyString = JSON.stringify(context); // Stringify payload
-    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     return this.api.post(this.path + '/login', context);
   }
 
@@ -57,8 +51,8 @@ export class AuthenticationService {
    * Logs out the user and clear credentials.
    * @return {Observable<boolean>} True if the user was logged out successfully.
    */
-  
-  logOut() {
+
+  logOut(): void {
     this.cookie.delete('token');
     this.router.navigate(['/login'], { replaceUrl: true });
   }
@@ -70,7 +64,7 @@ export class AuthenticationService {
 
   isAuthenticated(): boolean {
     try {
-      if (this.cookie.get('token').length > 0) {
+      if (this.cookie.check('token')) {
         this.token = true;
       } else {
         this.token = false;
@@ -96,21 +90,5 @@ export class AuthenticationService {
    */
   get credentials(): string {
     return this._credentials;
-  }
-
-  /**
-   * Sets the user credentials.
-   * The credentials may be persisted across sessions by setting the `remember` parameter to true.
-   * Otherwise, the credentials are only persisted for the current session.
-   * @param {Credentials=} credentials The user credentials.
-   */
-  private setCredentials(credentials?: string) {
-    this._credentials = credentials || null;
-
-    if (credentials) {
-      sessionStorage.setItem(credentialsKey, credentials);
-    } else {
-      sessionStorage.removeItem(credentialsKey);
-    }
   }
 }

@@ -11,7 +11,6 @@ import {
   AuthenticationService,
   LoginContext,
 } from 'src/app/auth/authentication.service';
-import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,7 +26,6 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private auth: AuthenticationService,
-    private cookie: CookieService,
     private pp: AppComponent
   ) {}
 
@@ -47,7 +45,7 @@ export class LoginComponent {
       };
       this.auth.login(loginContext).subscribe(
         (res) => {
-          this.router.navigate(['/prodotti'], { replaceUrl: true });
+          this.router.navigate(['/ordini'], { replaceUrl: true });
           this.pp.loginPage = false;
         },
         (error) => {

@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
   public logout(): void {
     this.loginPage = true;
-    this.authservice.logOut();
+    this.authService.logOut();
   }
 
   openCarrello(){

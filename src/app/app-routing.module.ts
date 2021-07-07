@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
+import { OrdiniComponent } from './pages/ordini/ordini.component';
 //components for routing
 import { AppComponent } from './app.component';
 import { AuthenticationGuard } from './auth/authentication.guard';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
+import { AnalisiComponent } from './pages/analisi/analisi.component';
+import {AcquistiComponent} from './pages/acquisti/acquisti.component';
+
 
 const routes: Routes = [
   {
@@ -23,9 +27,19 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
   },
   {
-    path: 'carrello',
-    component: CarrelloComponent,
+    path: 'ordini',
+    component: OrdiniComponent,
     canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'analisi',
+    component: AnalisiComponent,
+    canActivate: [AuthenticationGuard],
+  },
+  {
+  	path: 'acquisti',
+  	component: AcquistiComponent,
+  	canActivate: [AuthenticationGuard]
   }
 ];
 

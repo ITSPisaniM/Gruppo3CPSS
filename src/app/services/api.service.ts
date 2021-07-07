@@ -41,7 +41,7 @@ export class ApiService {
     }
   }
 
-  public get(path: string, params: any): Observable<any> {
+  public get(path: string, params?: any): Observable<any> {
     let Headers = new HttpHeaders();
     Headers.set('Content-Type', 'application/x-www-form-urlencoded');
     Headers.set('Accept', 'application/json');

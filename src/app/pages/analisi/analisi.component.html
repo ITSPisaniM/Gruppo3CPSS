@@ -1,0 +1,115 @@
+<div class="pt-16 px-20">
+  <!--Totale quantità e ricavi-->
+  <mat-accordion>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="justify-center">
+          Totale quantità e ricavi per settimana
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="block relative">
+        <form class="flex" [formGroup]="rangeBar">
+          <mat-form-field appearance="fill">
+            <mat-label>Seleziona una data</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input
+                matStartDate
+                matInput
+                readonly
+                formControlName="start"
+                placeholder="Data di inizio"
+                (dateChange)="searchBar()"
+              />
+              <input
+                matEndDate
+                matInput
+                readonly
+                formControlName="end"
+                placeholder="Data di fine"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+          <span class="px-2"></span>
+        </form>
+        <canvas
+          baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="chartOptions"
+          [legend]="chartLegend"
+          chartType="bar"
+        ></canvas>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="false">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="justify-center">
+          Totale quantità e ricavi per categoria
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="block relative">
+        <form class="flex" [formGroup]="rangeLine">
+          <mat-form-field appearance="fill">
+            <mat-label>Seleziona una data</mat-label>
+            <mat-date-range-input [rangePicker]="picker1">
+              <input
+                matStartDate
+                matInput
+                readonly
+                formControlName="start"
+                placeholder="Data di inizio"
+                (dateChange)="searchLine()"
+              />
+              <input
+                matEndDate
+                matInput
+                readonly
+                formControlName="end"
+                placeholder="Data di fine"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker1></mat-date-range-picker>
+          </mat-form-field>
+          <span class="flex-auto"></span>
+          <mat-form-field appearance="fill">
+            <mat-label>Prodotto</mat-label>
+            <input
+              type="text"
+              placeholder="Inserisci"
+              aria-label="Prodotto"
+              matInput
+              formControlName="item"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let item of filteredItemlist | async"
+                [value]="item.title"
+                (onSelectionChange)="searchLine(undefined, item.asin)"
+              >
+                <span>{{ item.title }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        <canvas
+          baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="chartOptions"
+          [legend]="chartLegend"
+          chartType="line"
+        ></canvas>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

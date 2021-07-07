@@ -1,26 +1,30 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #sidenav class="mat-elevation-z4" role="navigation" mode="over">
     <mat-nav-list>
-      <a mat-list-item href="#">
-        <mat-icon aria-label="ordini">receipt_long</mat-icon>
+      <a mat-list-item routerLink="ordini">
+        <mat-icon aria-label="ordini"> receipt_long </mat-icon>
         Ordini
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item routerLink="prodotti">
         <mat-icon aria-label="prodotti">category</mat-icon>
         Prodotti
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item href="#" routerLink="acquisti">
         <mat-icon aria-label="acquisti">storefront</mat-icon>
         Acquisti
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item routerLink="analisi">
         <mat-icon aria-label="analisi">show_chart</mat-icon>
         Analisi Vendite
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content role="region">
-    <mat-toolbar *ngIf="!loginPage" color="primary" class="mat-elevation-z6">
+    <mat-toolbar
+      *ngIf="!loginPage"
+      color="primary"
+      class="mat-elevation-z6 z-50 top-0 fixed"
+    >
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -35,19 +39,19 @@
         *ngIf="(isHandset$ | async) === false"
         style="display: flex; height: 100%"
       >
-        <button mat-button>
-          <mat-icon aria-label="ordini">receipt_long</mat-icon>
+        <button mat-button routerLink="ordini">
+          <mat-icon aria-label="ordini"> receipt_long </mat-icon>
           Ordini
         </button>
-        <button mat-button>
+        <button mat-button routerLink="prodotti">
           <mat-icon aria-label="prodotti">category</mat-icon>
           Prodotti
         </button>
-        <button mat-button>
+        <button mat-button routerLink="acquisti">
           <mat-icon aria-label="acquisti">storefront</mat-icon>
           Acquisti
         </button>
-        <button mat-button>
+        <button mat-button routerLink="analisi">
           <mat-icon aria-label="analisi">show_chart</mat-icon>
           Analisi Vendite
         </button>
@@ -63,6 +67,7 @@
         <mat-icon aria-label="logout" (click)="logout()">logout</mat-icon>
       </button>
     </mat-toolbar>
+    <div class="pt-10"></div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
