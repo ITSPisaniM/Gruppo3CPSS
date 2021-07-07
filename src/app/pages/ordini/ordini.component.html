@@ -54,6 +54,8 @@
       </div>
     </div>
   </form>
+
+  
   <mat-card class="example-card" *ngFor="let card of obs | async">
     <mat-card-header>
       <mat-card-title>{{ card.amazonOrderId }}</mat-card-title>
@@ -64,7 +66,7 @@
       <p>{{ card.purchaseDate | date: "dd/MM/yyyy" }}</p>
       <!--Lista Oggeti-->
       <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel class="w-max">
           <mat-expansion-panel-header>
             <mat-panel-title> Prodotti </mat-panel-title>
           </mat-expansion-panel-header>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Acquisto } from 'src/app/models/acquisto';
 
 @Component({
   selector: 'app-acquisti-dettaglio',
@@ -6,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./acquisti-dettaglio.component.scss'],
 })
 export class AcquistiDettaglioComponent implements OnInit {
-  constructor() {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public acquisto: Acquisto
+  ) {}
 
   ngOnInit(): void {}
 }
