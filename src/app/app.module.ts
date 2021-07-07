@@ -70,7 +70,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import '@angular/common/locales/global/it';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { AcquistiComponent } from './pages/acquisti/acquisti.component';
-import { DettaglioComponent } from './pages/acquisti/dettaglio/dettaglio.component';
+import { AcquistiDettaglioComponent } from './pages/acquisti/acquisti-dettaglio/acquisti-dettaglio.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +82,7 @@ import { DettaglioComponent } from './pages/acquisti/dettaglio/dettaglio.compone
     ProdottiDettaglioComponent,
     AnalisiComponent,
     AcquistiComponent,
-    DettaglioComponent,
+    AcquistiDettaglioComponent,
   ],
   imports: [
     BrowserModule,
