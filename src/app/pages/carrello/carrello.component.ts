@@ -1,5 +1,6 @@
 import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CarrelloService } from 'src/app/services/carrello.service';
 import { ProdottoDaComprare } from '../prodotti/ProdottoDaComprare';
 
 @Component({
@@ -13,7 +14,9 @@ export class CarrelloComponent implements OnInit {
 
   elementiCarrello: ProdottoDaComprare[];
 
-  constructor() { }
+  constructor(
+    private cart: CarrelloService,
+  ) { }
 
   ngOnInit(): void {
     this.getCarrello();
@@ -32,6 +35,11 @@ export class CarrelloComponent implements OnInit {
   svuota(){
     window.localStorage.removeItem("carrello");
     this.ngOnInit();
+  }
+
+  acquista(){
+    console.log("carrello: ",  this.elementiCarrello);
+    this.cart.insertAcquisto(this.elementiCarrello);
   }
 
 }

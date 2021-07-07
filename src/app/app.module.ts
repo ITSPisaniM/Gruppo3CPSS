@@ -32,6 +32,7 @@ import { DettaglioComponent } from './pages/prodotti/dettaglio/dettaglio.compone
 import { MatDialogModule } from '@angular/material/dialog';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     PaginatorModule,
     MatDialogModule,
     ScrollingModule,
+    MatSnackBarModule,
   ],
   providers: [
     ApiService,
