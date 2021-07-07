@@ -38,7 +38,6 @@ import { OrdiniDettaglioComponent } from './pages/ordini/ordini-dettaglio/ordini
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProdottiDettaglioComponent } from './pages/prodotti/prodotti-dettaglio/prodotti-dettaglio.component';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
-import { PaginatorModule } from 'primeng/paginator';
 import { OrdiniComponent } from './pages/ordini/ordini.component';
 import { ChartsModule } from 'ng2-charts';
 import { AnalisiComponent } from './pages/analisi/analisi.component';
@@ -89,30 +88,11 @@ import { DettaglioComponent } from './pages/acquisti/dettaglio/dettaglio.compone
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    MatMenuModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
     LayoutModule,
     MatFormFieldModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatCardModule,
-    MatExpansionModule,
     HttpClientModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    PaginatorModule,
-    MatDialogModule,
     ChartsModule,
     A11yModule,
     ClipboardModule,
@@ -129,10 +109,8 @@ import { DettaglioComponent } from './pages/acquisti/dettaglio/dettaglio.compone
     MatCheckboxModule,
     MatChipsModule,
     MatStepperModule,
-    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
-    MatExpansionModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
@@ -159,8 +137,6 @@ import { DettaglioComponent } from './pages/acquisti/dettaglio/dettaglio.compone
     PortalModule,
     ScrollingModule,
     MatExpansionModule,
-    MatPaginatorModule,
-    MatDatepickerModule,
     MatMomentDateModule,
   ],
   providers: [
