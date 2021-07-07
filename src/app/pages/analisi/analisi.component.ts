@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import {
   DateRange,
@@ -15,6 +15,7 @@ import { ProdottiService } from 'src/app/services/prodotti.service';
 import { Prodotto } from '../../models/prodotto';
 import { Day } from '../../models/day';
 import { BaseResponse } from 'src/app/models/spring-response';
+import { formatDate } from '@angular/common';
 
 @Injectable()
 export class FiveDayRangeSelectionStrategy<D>
@@ -53,6 +54,12 @@ export class FiveDayRangeSelectionStrategy<D>
   ],
 })
 export class AnalisiComponent implements OnInit {
+  // Gestione exp panel
+  isOpen: boolean;
+
+  // Fuck
+  latestAsin: string;
+
   // Filtro autocomplete
   itemList: any[] = [];
   filteredItemlist: Observable<any[]>;
@@ -63,19 +70,22 @@ export class AnalisiComponent implements OnInit {
     end: new FormControl(),
   });
   rangeLine = new FormGroup({
-    start: new FormControl(),
+    start: new FormControl('', [Validators.required]),
     end: new FormControl(),
-    item: new FormControl(),
+    item: new FormControl('', [Validators.required]),
   });
 
   //Common chart
   public chartOptions: ChartOptions = {
     responsive: true,
-    aspectRatio: 3,
+    aspectRatio: 3.1,
     scales: {
       xAxes: [{ ticks: { fontColor: 'white' }, gridLines: { display: false } }],
       yAxes: [
-        { ticks: { fontColor: 'white' }, gridLines: { color: '#999999' } },
+        {
+          ticks: { fontColor: 'white', beginAtZero: true },
+          gridLines: { color: '#999999' },
+        },
       ],
     },
   };
@@ -105,15 +115,15 @@ export class AnalisiComponent implements OnInit {
       data: [],
       label: 'Quantità',
       fill: false,
-      hoverBackgroundColor: '#805194',
       borderColor: '#7B1FA2',
+      pointBackgroundColor: '#7B1FA2',
     },
     {
       data: [],
       label: 'Ricavi',
       fill: false,
-      hoverBackgroundColor: '#b8f2d6',
       borderColor: '#69F0AE',
+      pointBackgroundColor: '#69F0AE',
     },
   ];
 
@@ -125,6 +135,13 @@ export class AnalisiComponent implements OnInit {
 
   //Inizializzazione
   ngOnInit(): void {
+    // Inizializzazione grafico a barre
+    var d = new Date();
+    d.setDate(d.getDate() - 6);
+    this.rangeBar.get('start').setValue(d);
+    this.rangeBar.get('end').setValue(new Date());
+    this.searchBar(d.toISOString());
+
     //Prendi prodotti per autocomplete
     this.prodottiService
       .getProdotti()
@@ -137,6 +154,9 @@ export class AnalisiComponent implements OnInit {
           this.itemList.push(sItem);
         });
         //Inizializzazione grafico a linee
+        this.rangeLine.get('item').setValue(this.itemList[0].title);
+        this.rangeLine.get('start').setValue(d);
+        this.rangeLine.get('end').setValue(new Date());
         this.searchLine(d.toISOString(), this.itemList[0].asin);
       });
     // Funzione per autocomplete
@@ -144,26 +164,25 @@ export class AnalisiComponent implements OnInit {
       startWith(''),
       map((value) => this._filter(value))
     );
-    // Inizializzazione grafico a barre
-    var d = new Date();
-    d.setDate(d.getDate() - 7);
-    this.searchBar(d.toISOString());
   }
 
   // Ricerca grafico a barre
   public searchBar(date?: string): void {
-    // Reset
-    this.barChartLabels.length = 0;
-    this.barChartData[0].data.length = 0;
-    this.barChartData[1].data.length = 0;
-
     this.analisiService
       .getTotQandR(
         this.commons.fixDate(date || this.rangeBar.get('start').value)
       )
       .subscribe((res: BaseResponse<Day[]>) => {
+        // Reset
+        this.barChartLabels = [];
+        this.barChartData[0].data = [];
+        this.barChartData[1].data = [];
+
+        //Aggiunta dati
         res.data.forEach((day: Day) => {
-          this.barChartLabels.push(day.startDate.split('T')[0]);
+          this.barChartLabels.push(
+            formatDate(day.startDate, 'dd/MM/yyyy', 'it')
+          );
           this.barChartData[0].data.push(day.quantitaTot);
           this.barChartData[1].data.push(day.ricaviTot);
         });
@@ -173,23 +192,31 @@ export class AnalisiComponent implements OnInit {
 
   //Ricerca grafico a linee
   public searchLine(date?: string, asin?: string): void {
-    //Reset
-    this.lineChartLabels.length = 0;
-    this.lineChartData[0].data.length = 0;
-    this.lineChartData[1].data.length = 0;
+    if (asin) {
+      this.latestAsin = asin;
+    }
+    if (this.rangeLine.get('start').valid && this.latestAsin) {
+      this.analisiService
+        .getTotQandRperItem(
+          this.commons.fixDate(date || this.rangeLine.get('start').value),
+          this.latestAsin
+        )
+        .subscribe((res) => {
+          //Reset
+          this.lineChartLabels = [];
+          this.lineChartData[0].data = [];
+          this.lineChartData[1].data = [];
 
-    this.analisiService
-      .getTotQandRperItem(
-        this.commons.fixDate(date || this.rangeLine.get('start').value),
-        asin || this.rangeLine.get('item').value
-      )
-      .subscribe((res) => {
-        res.data.forEach((day: Day) => {
-          this.lineChartLabels.push(day.startDate.split('T')[0]);
-          this.lineChartData[0].data.push(day.quantitaTot);
-          this.lineChartData[1].data.push(day.ricaviTot);
+          //Aggiunta dati
+          res.data.forEach((day: Day) => {
+            this.lineChartLabels.push(
+              formatDate(day.startDate, 'dd/MM/yyyy', 'it')
+            );
+            this.lineChartData[0].data.push(day.quantitaTot);
+            this.lineChartData[1].data.push(day.ricaviTot);
+          });
         });
-      });
+    }
   }
 
   // Funzione di filtro per l'autocomplete

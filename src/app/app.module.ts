@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,6 +68,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import '@angular/common/locales/global/it';
 @NgModule({
   declarations: [
     AppComponent,
@@ -163,7 +164,14 @@ import { MatTreeModule } from '@angular/material/tree';
       useClass: TokenInterceptor,
       multi: true,
     },
-    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'it',
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'it',
+    },
   ],
   bootstrap: [AppComponent],
 })
