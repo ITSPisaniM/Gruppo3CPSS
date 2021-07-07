@@ -69,6 +69,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import '@angular/common/locales/global/it';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { AcquistiComponent } from './pages/acquisti/acquisti.component';
+import { DettaglioComponent } from './pages/acquisti/dettaglio/dettaglio.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +82,8 @@ import '@angular/common/locales/global/it';
     ProdottiComponent,
     ProdottiDettaglioComponent,
     AnalisiComponent,
+    AcquistiComponent,
+    DettaglioComponent,
   ],
   imports: [
     BrowserModule,
@@ -152,6 +158,10 @@ import '@angular/common/locales/global/it';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
   providers: [
     ApiService,
