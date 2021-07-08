@@ -10,8 +10,6 @@ import { ProdottoDaComprare } from '../../models/ProdottoDaComprare';
 })
 export class CarrelloComponent implements OnInit {
 
-  carrello: string;
-
   elementiCarrello: ProdottoDaComprare[];
 
   constructor(
@@ -20,21 +18,13 @@ export class CarrelloComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCarrello();
-    this.findElement();
   }
 
   getCarrello(){
-    this.carrello = window.localStorage.getItem("carrello");
-  }
-
-
-  findElement(){
-    this.elementiCarrello = JSON.parse(this.carrello);
-    
+    this.elementiCarrello = JSON.parse(window.localStorage.getItem("carrello"));
   }
   svuota(){
     window.localStorage.removeItem("carrello");
-    this.carrello ="";
     this.elementiCarrello = [];
     this.ngOnInit();
   }

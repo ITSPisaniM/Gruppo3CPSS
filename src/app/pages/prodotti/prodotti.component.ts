@@ -61,6 +61,8 @@ export class ProdottiComponent implements OnInit {
   elementiCarrello: ProdottoDaComprare[] =[];
   spostaNelCarrello(item: Prodotto) {
 
+    if(window.localStorage.getItem("carrello") != null) this.elementiCarrello = JSON.parse(window.localStorage.getItem("carrello"));
+
     var elDaComprareEQta: ProdottoDaComprare = {
       prodotto: item,
       qta: this.loginForm.controls.qta.value
@@ -72,8 +74,7 @@ export class ProdottiComponent implements OnInit {
     } else {
         this.elementiCarrello.push(elDaComprareEQta);
 
-      window.localStorage.setItem("carrello", window.localStorage.getItem("carrello") == null ?
-        JSON.stringify(this.elementiCarrello) : window.localStorage.getItem("carrello") + "," + JSON.stringify(this.elementiCarrello));
+      window.localStorage.setItem("carrello", JSON.stringify(this.elementiCarrello));
 
       this.openSnackBar("aggiunto");
     }
@@ -91,7 +92,7 @@ export class ProdottiComponent implements OnInit {
   }
 
   controllaPresenzaCarrello(item: ProdottoDaComprare): boolean {
-    this.getElementCarrello();
+    //this.getElementCarrello();
     return this.findElement(item);
   }
 
@@ -100,7 +101,7 @@ export class ProdottiComponent implements OnInit {
       console.log(this.elementiCarrello);
       var rr = this.elementiCarrello.find(element => element.prodotto.asin == item.prodotto.asin);
 
-    return rr == null? false : true;
+      return rr == null? false : true;
     }
   }
 
