@@ -15,11 +15,11 @@ export interface Ordine {
   orderType: string;
   earliestShipDate: Date;
   latestShipDate: Date;
-  isBusinessOrder: boolean;
-  isPrime: boolean;
-  isGlobalExpressEnabled: boolean;
-  isPremiumOrder: boolean;
-  isSoldByAb: boolean;
+  businessOrder: boolean;
+  prime: boolean;
+  globalExpressEnabled: boolean;
+  premiumOrder: boolean;
+  soldByAb: boolean;
   companyLegalName: string;
   buyerEmail: string;
   buyerName: string;
