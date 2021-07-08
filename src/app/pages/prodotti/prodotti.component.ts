@@ -61,7 +61,10 @@ export class ProdottiComponent implements OnInit {
   elementiCarrello: ProdottoDaComprare[] =[];
   spostaNelCarrello(item: Prodotto) {
 
-    if(window.localStorage.getItem("carrello") != null) this.elementiCarrello = JSON.parse(window.localStorage.getItem("carrello"));
+    if(window.localStorage.getItem("carrello") != null) 
+      this.elementiCarrello = JSON.parse(window.localStorage.getItem("carrello"));
+    else 
+      this.elementiCarrello = [];
 
     var elDaComprareEQta: ProdottoDaComprare = {
       prodotto: item,
@@ -89,6 +92,8 @@ export class ProdottiComponent implements OnInit {
     this.elementiCarrello[indx] = k;
 
     window.localStorage.setItem("carrello", JSON.stringify(this.elementiCarrello));
+
+    this.loginForm.controls.qta.setValue(10);
   }
 
   controllaPresenzaCarrello(item: ProdottoDaComprare): boolean {

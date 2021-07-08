@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Notifica } from 'src/app/models/notifica';
 import { Prodotto } from 'src/app/models/prodotto';
 
@@ -9,9 +10,7 @@ import { Prodotto } from 'src/app/models/prodotto';
 })
 export class NotificheComponent implements OnInit {
 
-  constructor() { }
-
-  notifiche: Notifica[];
+  constructor(@Inject(MAT_DIALOG_DATA) public notifiche: Notifica[]) { }
 
   ngOnInit(): void {
   }

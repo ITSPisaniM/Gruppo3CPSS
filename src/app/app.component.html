@@ -57,7 +57,7 @@
         </button>
       </div>
       <span style="flex: 1 1 auto"></span>
-      <button mat-icon-button [matBadge]="notifiche.length" matBadgeColor="warn">
+      <button mat-icon-button [matBadge]="notifiche.length" matBadgeColor="warn" matBadgePosition="before" (click)="openNotifiche()">
         <mat-icon aria-label="notifiche">notifications</mat-icon>
       </button>
       <button mat-icon-button (click)="openCarrello()">

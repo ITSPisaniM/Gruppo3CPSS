@@ -63,6 +63,7 @@ export class AppComponent implements OnInit {
         if(element.stock <= element.giacenzaMinima){
           this.notifiche.push({
             asin: element.asin,
+            title: element.title,
             qta: element.stock
           });
         }     
