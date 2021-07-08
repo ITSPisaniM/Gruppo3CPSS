@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>NOTIFICHE</h1>
+<div mat-dialog-content *ngFor="let item of notifiche">
+    <mat-card-content class="pt-4">
+
+        <p>
+            ATTENZIONE: IL PRODOTTO {{item.title}} ( {{item.asin}} ) STA PER FINIRE<br>
+            MAGAZZINO: {{item.qta}}
+        </p>
+
+    </mat-card-content>
+    <mat-divider></mat-divider>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+</div>

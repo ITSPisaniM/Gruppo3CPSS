@@ -72,10 +72,10 @@
         </button>
       </div>
       <span class="flex-auto"></span>
-      <button mat-icon-button>
+      <button mat-icon-button [matBadge]="notifiche.length" matBadgeColor="warn" matBadgePosition="before" (click)="openNotifiche()">
         <mat-icon aria-label="notifiche">notifications</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="openCarrello()">
         <mat-icon aria-label="carrello">shopping_cart</mat-icon>
       </button>
       <button mat-icon-button>

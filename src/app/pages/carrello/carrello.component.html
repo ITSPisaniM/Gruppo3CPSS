@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>CARRELLO</h1>
+<div class="grid gap-2 grid-cols-2 p-8">
+  <p *ngIf="acquistoFatto">ACQUISTO ESEGUITO</p>
+  <div mat-dialog-content *ngFor="let item of elementiCarrello">
+    <mat-card-content>
+      <p>
+        ASIN: {{item.prodotto.asin}}
+      </p>
+      <p>
+        title: {{item.prodotto.title}}
+      </p>
+      <p>
+        category: {{item.prodotto.category}}
+      </p>
+      <p>
+        price: {{item.prodotto.price}}
+      </p>
+      <p>
+        stock: {{item.prodotto.stock}}
+      </p>
+      <p>
+        brand: {{item.prodotto.brand}}
+      </p>
+      <p>
+        quantità: {{item.quantita}}
+      </p>
+      <button mat-button (click)="togli(item.prodotto.asin)" color="warn">canc</button>
+      <mat-divider></mat-divider> 
+    </mat-card-content>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="svuota()" color="warn">Svuota</button>
+  <button mat-button (click)="acquista()"color="accent">Acquista</button>
+</div>

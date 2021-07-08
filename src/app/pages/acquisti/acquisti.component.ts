@@ -9,6 +9,7 @@ import { AcquistiDettaglioComponent } from './acquisti-dettaglio/acquisti-dettag
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { Acquisto } from 'src/app/models/acquisto';
 import { CommonsService } from 'src/app/services/commons.service';
+import { Page } from 'src/app/models/page';
 
 @Component({
   selector: 'app-acquisti',
@@ -22,10 +23,9 @@ export class AcquistiComponent implements OnInit {
   obs: Observable<any>;
   dataSource: MatTableDataSource<Acquisto>;
   public listaAcquisti: Acquisto[];
-  private index: number = 0;
   length: number;
-  pageSize: number = 2;
-  pageSizeOptions: number[] = [2, 5, 10, 25, 100];
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
 
   constructor(
     private acquistiService: AcquistiService,
@@ -33,7 +33,7 @@ export class AcquistiComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
     private commons: CommonsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
@@ -41,7 +41,9 @@ export class AcquistiComponent implements OnInit {
       supplierId: new FormControl(''),
       billDate: new FormControl(''),
     });
-    this.getElPagination(this.index, this.pageSize);
+    this.acquistiService.getAcquistiPagination(0, this.pageSize).subscribe((res: Page<Acquisto[]>) => {
+      this.populateTable(res.data.content, res.data.totalElements)
+    })
   }
 
   filter(): void {
@@ -54,27 +56,16 @@ export class AcquistiComponent implements OnInit {
             ? this.commons.fixDate(this.filterForm.get('purchaseDate').value)
             : ''
         )
-        .subscribe((res) => {
-          this.dataSource = new MatTableDataSource<Acquisto>(res.data);
-          this.changeDetectorRef.detectChanges();
-          this.dataSource.paginator = this.paginator;
-          this.obs = this.dataSource.connect();
+        .subscribe((res: Page<Acquisto[]>) => {
+          this.populateTable(res.data.content, res.data.totalElements)
         });
     } else {
-      this.getAll();
+      this.acquistiService.getAcquistiPagination(0, this.pageSize).subscribe((res: Page<Acquisto[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements)
+      })
     }
   }
 
-  getAll(): void {
-    this.acquistiService.getAcquisti().subscribe((res) => {
-      console.log(res.data);
-      this.dataSource = new MatTableDataSource<Acquisto>(res.data);
-      this.changeDetectorRef.detectChanges();
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-      // set paginator settings
-    });
-  }
 
   openDettaglio(acquisto: Acquisto): void {
     this.dialog.open(AcquistiDettaglioComponent, {
@@ -83,17 +74,15 @@ export class AcquistiComponent implements OnInit {
   }
 
   pageEvent(event: PageEvent): void {
-    this.getElPagination(event.pageIndex, event.pageSize);
+    this.acquistiService.getAcquistiPagination(event.pageIndex, event.pageSize).subscribe((res:Page<Acquisto[]>)=>{
+      this.populateTable(res.data.content,res.data.totalElements)
+    })
   }
 
-  getElPagination(index: number, size: number) {
-    this.acquistiService.getAcquistiPagination(index, size).subscribe((res) => {
-      this.listaAcquisti = res.data.content;
-      this.dataSource = new MatTableDataSource<Acquisto>(this.listaAcquisti);
-      this.changeDetectorRef.detectChanges();
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-      console.log('lis', this.listaAcquisti);
-    });
+  populateTable(acquisti: Acquisto[], elementiTotali: number): void {
+    this.dataSource = new MatTableDataSource<Acquisto>(acquisti);
+    this.changeDetectorRef.detectChanges();
+    this.obs = this.dataSource.connect();
+    this.length = elementiTotali;
   }
 }

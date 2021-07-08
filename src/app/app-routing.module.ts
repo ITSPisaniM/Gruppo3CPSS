@@ -6,6 +6,7 @@ import { OrdiniComponent } from './pages/ordini/ordini.component';
 import { AppComponent } from './app.component';
 import { AuthenticationGuard } from './auth/authentication.guard';
 import { ProdottiComponent } from './pages/prodotti/prodotti.component';
+import { CarrelloComponent } from './pages/carrello/carrello.component';
 import { AnalisiComponent } from './pages/analisi/analisi.component';
 import {AcquistiComponent} from './pages/acquisti/acquisti.component';
 
