@@ -38,25 +38,16 @@ export class ProdottiComponent implements OnInit {
     this.loginForm = this.fb.group({
       qta: new FormControl(10, [Validators.required]),
     });
-    this.myLazyLoad();
+    this.prodottiService
+      .getProdottiPagination(0, this.pageSize)
+      .subscribe((res: Page<Prodotto[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements);
+      });
   }
 
   populateTable(prodotti: Prodotto[], elementiTotali: number) {
     this.listaProdotti = prodotti;
     this.length = elementiTotali;
-  }
-
-  //elementi da visualizzzare nella pagina
-  private elPerPage: number;
-  getElPerPage(value: number) {
-    this.elPerPage = value;
-    this.myLazyLoad();
-  }
-
-  private index: number;
-  getIndex(value: number) {
-    this.index = value;
-    this.myLazyLoad();
   }
 
   carrello: string;
@@ -142,14 +133,6 @@ export class ProdottiComponent implements OnInit {
       data: prodotto,
       width: '80%',
     });
-  }
-
-  async myLazyLoad() {
-    this.prodottiService
-      .getProdottiPagination(this.index, this.elPerPage)
-      .subscribe((res) => {
-        this.listaProdotti = res.data.content;
-      });
   }
 
   pageEvent(event: PageEvent): void {
