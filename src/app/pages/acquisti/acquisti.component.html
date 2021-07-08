@@ -1,0 +1,51 @@
+<div class="pt-8">
+  <mat-card
+    class="force-flex justify-center items-center w-3/4 mx-auto mt-2"
+    *ngFor="let card of obs | async"
+  >
+    <mat-card-header>
+      <mat-card-title>{{ card.purchaseId }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ card.billDate | date: "dd/MM/yyyy" }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <span class="flex-auto"></span>
+    <mat-card-content class="w-1/2">
+      <!--Lista Oggeti-->
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Acquisti </mat-panel-title>
+          </mat-expansion-panel-header>
+          <!--Lista oggetti-->
+          <mat-list role="list">
+            <div *ngFor="let item of card.acquistiProdotti">
+              <mat-list-item role="listitem">
+                <p>ASIN: {{ item.asin }}</p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <p>price: {{ item.unitPrice }}</p>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </div>
+          </mat-list>
+          <!--Fine lista oggeti-->
+        </mat-expansion-panel>
+      </mat-accordion>
+      <!--Fine lista oggetti-->
+    </mat-card-content>
+    <span class="flex-auto"></span>
+    <button mat-icon-button (click)="openDettaglio(card)">
+      <mat-icon aria-label="info" color="link">info</mat-icon>
+    </button>
+  </mat-card>
+  <div class="pb-10"></div>
+  <mat-paginator
+    class="w-full fixed bottom-0"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageEvent($event)"
+  >
+  </mat-paginator>
+</div>

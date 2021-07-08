@@ -1,0 +1,54 @@
+<div class="grid gap-4 grid-cols-5 p-8">
+  <mat-card
+    *ngFor="let item of listaProdotti"
+    class="justify-start flex-col flex-wrap"
+  >
+    <mat-card-header>
+      <mat-card-title>
+        {{ item.title }}
+        <button mat-icon-button (click)="openDettaglio(item)">
+          <mat-icon aria-label="info" color="link">info</mat-icon>
+        </button>
+      </mat-card-title>
+      <mat-card-subtitle>{{ item.category }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="assets/{{ item.asin }}.jpg"
+      alt="{{ item.title }}"
+      class="pl-6"
+    />
+
+    <mat-card-content>
+      <p>Magazzino: {{ item.stock }}</p>
+    </mat-card-content>
+    <mat-card-actions class="m-auto">
+      <div class="grid gap-4 grid-cols-2 px-2">
+        <form class="example-form" [formGroup]="loginForm">
+          <mat-label> Quantità: </mat-label>
+          <input
+            formControlName="qta"
+            type="number"
+            matInput
+            class="w-24 text-white"
+            [defaultValue]="10"
+          />
+        </form>
+        <button mat-button>
+          <mat-icon aria-hidden="false" (click)="spostaNelCarrello(item)">
+            add_circle
+          </mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div class="pb-10"></div>
+<mat-paginator
+  class="w-full fixed bottom-0"
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="pageEvent($event)"
+>
+</mat-paginator>

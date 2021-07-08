@@ -1,0 +1,72 @@
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">ASIN</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        {{ prodotto.asin }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Titolo</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        {{ prodotto.title }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Marca</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        {{ prodotto.brand }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Categoria</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        {{ prodotto.category }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Prezzo</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        {{ prodotto.price }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Giacenza</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        Attuale: {{ prodotto.stock }}<br />
+        Minima: {{ prodotto.giacenzaMinima }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="accent">Chiudi</button>
+</mat-dialog-actions>

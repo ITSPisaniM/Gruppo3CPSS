@@ -1,0 +1,166 @@
+<mat-dialog-content>
+  <div class="text-3xl font-bold">Ordine</div>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">ID</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        Amazon Id: {{ ordine.amazonOrderId }}<br />
+        Marketplace Id: {{ ordine.marketplaceId }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Data d'acquisto</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        {{ ordine.purchaseDate | date }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Stato ordine</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        {{ ordine.orderStatus }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Oggetti</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        Spediti: {{ ordine.numberOfItemsShipped }}<br />
+        Non spediti:
+        {{ ordine.numberOfItemsUnshipped || 0 }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Pagamento</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        Tipo: {{ ordine.paymentMethod || "N/D" }}<br />
+        Dettagli:
+        {{ ordine.paymentMethodDetails }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Dettagli spedizione</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        <div>Livello spedizione: {{ ordine.shipmentServiceLevelCategory }}</div>
+        <div *ngIf="ordine.businessOrder">Ordine Commerciale</div>
+        <div *ngIf="ordine.prime">Ordine Prime</div>
+        <div *ngIf="ordine.globalExpressEnabled">Spedizione Globale</div>
+        <div *ngIf="ordine.premiumOrder">Ordine Premium</div>
+        <div *ngIf="ordine.soldByAb">Venduto da Amazon Business</div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div class="text-2xl font-medium">Acquirente</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-white text-opacity-70">
+        <div *ngIf="!(ordine.companyLegalName == '-')">
+          Nome azienda: {{ ordine.companyLegalName }}
+        </div>
+        <div>Nome: {{ ordine.buyerName }}</div>
+        <div>Email: {{ ordine.buyerEmail }}</div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="6:1">
+    <mat-grid-tile>
+      <div mat-line class="text-2xl font-medium">Indirizzo</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div mat-line class="text-white text-opacity-70">
+        {{ ordine.shippingAddressName }}<br />
+        {{ ordine.shippingAddressLine1 }}<br />
+        {{ ordine.shippingAddressCity }}
+        {{ ordine.shippingStateOrRegionPostalCode }}
+        <br />
+        {{ ordine.shippingCityStateOrRegion }}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <br />
+
+  <div class="text-3xl font-bold">Prodotti</div>
+
+  <mat-table [dataSource]="ordine.ordersItems">
+    <ng-container matColumnDef="asin">
+      <mat-header-cell *matHeaderCellDef> ASIN </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.asin }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Titolo</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.title }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantityOrdered">
+      <mat-header-cell *matHeaderCellDef> Quantità ordinata</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.quantityOrdered }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantityShipped">
+      <mat-header-cell *matHeaderCellDef> Quantità spedita</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.quantityShipped }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="itemPriceAmount">
+      <mat-header-cell *matHeaderCellDef> Prezzo</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.itemPriceAmount }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="shippingPriceAmount">
+      <mat-header-cell *matHeaderCellDef> Prezzo spedizione</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.shippingPriceAmount }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="itemPriceCurrencyCode">
+      <mat-header-cell *matHeaderCellDef> Valuta</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.itemPriceCurrencyCode }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="accent">Chiudi</button>
+</mat-dialog-actions>
