@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AcquistiService } from 'src/app/services/acquisti.service';
 import { ProdottoDaComprare } from '../../models/ProdottoDaComprare';
 
@@ -11,8 +12,11 @@ export class CarrelloComponent implements OnInit {
 
   elementiCarrello: ProdottoDaComprare[];
 
+  acquistoFatto:boolean = false;
+
   constructor(
-    private cart: AcquistiService
+    private cart: AcquistiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +46,10 @@ export class CarrelloComponent implements OnInit {
     }));
 
     this.cart.insertAcquisto({prodotto: this.elementiCarrello}).subscribe(res => {
-      console.log("res: ", res);
+      if(res.errors.length == 0){
+        this.svuota();
+        this.acquistoFatto = true;
+      }
     });
   }
 

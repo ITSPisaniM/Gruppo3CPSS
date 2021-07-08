@@ -42,6 +42,6 @@ export class AcquistiService {
       .set('amazonOrderId', amazonOrderId)
       .set('buyerEmail', buyerEmail)
       .set('purchaseDate', purchaseDate);
-    return this.api.get(this.rootI, params);
+    return this.api.get(this.rootI + 'filter', params);
   }
 }
