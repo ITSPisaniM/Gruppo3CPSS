@@ -18,7 +18,8 @@ export class OrdiniService {
   public getOrdiniPagination(page: number, elements?: number): Observable<any> {
     var params = new HttpParams()
       .set('page', page.toString())
-      .set('size', elements?.toString() || '');
+      .set('size', elements?.toString() || '')
+      .set('sort', 'purchaseDate,DESC');
     return this.api.get(this.path + '/page', params);
   }
 
@@ -30,7 +31,8 @@ export class OrdiniService {
     var params = new HttpParams()
       .set('amazonOrderId', amazonOrderId)
       .set('buyerEmail', buyerEmail)
-      .set('purchaseDate', purchaseDate);
+      .set('purchaseDate', purchaseDate)
+      .set('sort', 'purchaseDate,DESC');
     return this.api.get(this.path, params);
   }
 }

@@ -5,31 +5,32 @@ import { ProdottoDaComprare } from '../models/ProdottoDaComprare';
 import { ApiService } from './api.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AcquistiService {
+  private rootI = 'acquisti/';
 
-  private rootI = 'acquisti/'
+  constructor(private api: ApiService) {}
 
-  constructor(
-    private api: ApiService,
-    ) {}
-
-  public getAcquisti():Observable<any>{
-    return this.api.get(this.rootI + 'list','');
+  public getAcquisti(): Observable<any> {
+    return this.api.get(this.rootI + 'list', '');
   }
 
-  public getNumAcquisti():Observable<any>{
-    return this.api.get(this.rootI + 'count','');
+  public getNumAcquisti(): Observable<any> {
+    return this.api.get(this.rootI + 'count', '');
   }
 
-  public getAcquistiPagination(index:number, size:number): Observable<any> {
-    return this.api.get(this.rootI + 'page?page=' + index + '&size=' + size , '');
+  public getAcquistiPagination(index: number, size: number): Observable<any> {
+    var params = new HttpParams()
+      .set('page', index.toString())
+      .set('size', size.toString())
+      .set('sort', 'billDate,DESC');
+    return this.api.get(this.rootI + 'page', params);
   }
 
-  public insertAcquisto(carrello:any):Observable<any>{
+  public insertAcquisto(carrello: any): Observable<any> {
     console.log(this.rootI + 'save', carrello);
-    
+
     return this.api.post(this.rootI + 'save', carrello);
   }
 
@@ -41,7 +42,8 @@ export class AcquistiService {
     var params = new HttpParams()
       .set('amazonOrderId', amazonOrderId)
       .set('buyerEmail', buyerEmail)
-      .set('purchaseDate', purchaseDate);
+      .set('purchaseDate', purchaseDate)
+      .set('sort', 'billDate,DESC');
     return this.api.get(this.rootI + 'filter', params);
   }
 }
