@@ -90,6 +90,7 @@ export class OrdiniComponent implements OnInit, OnDestroy {
   openDettaglio(ordine: Ordine): void {
     this.dialog.open(OrdiniDettaglioComponent, {
       data: ordine,
+      width: '80%',
     });
   }
 
