@@ -9,7 +9,7 @@
         <mat-icon aria-label="prodotti">category</mat-icon>
         Prodotti
       </a>
-      <a mat-list-item href="#" routerLink="acquisti">
+      <a mat-list-item routerLink="acquisti">
         <mat-icon aria-label="acquisti">storefront</mat-icon>
         Acquisti
       </a>
@@ -34,29 +34,44 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span style="padding-right: 1%">Seller Manager</span>
-      <div
-        *ngIf="(isHandset$ | async) === false"
-        style="display: flex; height: 100%"
-      >
-        <button mat-button routerLink="ordini">
+      <span>Seller Manager</span>
+
+      <div *ngIf="(isHandset$ | async) === false" class="flex h-full">
+        <mat-divider vertical class="w-5"></mat-divider>
+        <button
+          mat-button
+          routerLink="ordini"
+          [disabled]="actualPage === '/ordini'"
+        >
           <mat-icon aria-label="ordini"> receipt_long </mat-icon>
           Ordini
         </button>
-        <button mat-button routerLink="prodotti">
+        <button
+          mat-button
+          routerLink="prodotti"
+          [disabled]="actualPage === '/prodotti'"
+        >
           <mat-icon aria-label="prodotti">category</mat-icon>
           Prodotti
         </button>
-        <button mat-button routerLink="acquisti">
+        <button
+          mat-button
+          routerLink="acquisti"
+          [disabled]="actualPage === '/acquisti'"
+        >
           <mat-icon aria-label="acquisti">storefront</mat-icon>
           Acquisti
         </button>
-        <button mat-button routerLink="analisi">
+        <button
+          mat-button
+          routerLink="analisi"
+          [disabled]="actualPage === '/analisi'"
+        >
           <mat-icon aria-label="analisi">show_chart</mat-icon>
           Analisi Vendite
         </button>
       </div>
-      <span style="flex: 1 1 auto"></span>
+      <span class="flex-auto"></span>
       <button mat-icon-button>
         <mat-icon aria-label="notifiche">notifications</mat-icon>
       </button>
