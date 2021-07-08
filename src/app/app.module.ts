@@ -72,6 +72,7 @@ import '@angular/common/locales/global/it';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { AcquistiComponent } from './pages/acquisti/acquisti.component';
 import { AcquistiDettaglioComponent } from './pages/acquisti/acquisti-dettaglio/acquisti-dettaglio.component';
+import { NotificheComponent } from './pages/notifiche/notifiche.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { AcquistiDettaglioComponent } from './pages/acquisti/acquisti-dettaglio/
     AnalisiComponent,
     AcquistiComponent,
     AcquistiDettaglioComponent,
-    CarrelloComponent
+    CarrelloComponent,
+    NotificheComponent
   ],
   imports: [
     BrowserModule,

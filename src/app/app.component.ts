@@ -1,12 +1,15 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { elementAt, map, shareReplay } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { AuthenticationService } from './auth/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
 import { ProdottoDaComprare } from './models/ProdottoDaComprare';
+import { Prodotto } from './models/prodotto';
+import { ProdottiService } from './services/prodotti.service';
+import { Notifica } from './models/notifica';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +22,14 @@ export class AppComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private location: Location,
+    private prod: ProdottiService,
     private authservice: AuthenticationService,
-    public dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
+    //controllo giacenze
+    this.controlloGiacenze();
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -48,5 +53,21 @@ export class AppComponent implements OnInit {
     console.log(value + "sa");
     
     this.elDaComprare.push(value);
+  }
+
+  notifiche:Notifica[] =[];
+  controlloGiacenze(){
+    this.prod.getProdotti().subscribe((res)=>{
+      res.data.forEach(element => {
+        if(element.stock <= element.giacenzaMinima){
+          this.notifiche.push({
+            asin: element.asin,
+            qta: element.stock
+          });
+        }     
+      });
+      
+      console.log("notifiche: ", this.notifiche );   
+    })
   }
 }

@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Dialog with elements</h1>
+<div class="grid gap-2 grid-cols-2 p-8">
+  <div mat-dialog-content *ngFor="let item of notifiche">
+    <mat-card-content>
+
+      <p>
+        ATTENZIONE: IL PRODOTTO {{item.asin}} STA PER FINIRE<br>
+        MAGAZZINO: {{item.qta}}
+      </p>
+
+    </mat-card-content>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
