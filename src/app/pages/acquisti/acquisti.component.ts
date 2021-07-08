@@ -33,7 +33,7 @@ export class AcquistiComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
     private commons: CommonsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
@@ -41,9 +41,11 @@ export class AcquistiComponent implements OnInit {
       supplierId: new FormControl(''),
       billDate: new FormControl(''),
     });
-    this.acquistiService.getAcquistiPagination(0, this.pageSize).subscribe((res: Page<Acquisto[]>) => {
-      this.populateTable(res.data.content, res.data.totalElements)
-    })
+    this.acquistiService
+      .getAcquistiPagination(0, this.pageSize)
+      .subscribe((res: Page<Acquisto[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements);
+      });
   }
 
   filter(): void {
@@ -57,15 +59,16 @@ export class AcquistiComponent implements OnInit {
             : ''
         )
         .subscribe((res: Page<Acquisto[]>) => {
-          this.populateTable(res.data.content, res.data.totalElements)
+          this.populateTable(res.data.content, res.data.totalElements);
         });
     } else {
-      this.acquistiService.getAcquistiPagination(0, this.pageSize).subscribe((res: Page<Acquisto[]>) => {
-        this.populateTable(res.data.content, res.data.totalElements)
-      })
+      this.acquistiService
+        .getAcquistiPagination(0, this.pageSize)
+        .subscribe((res: Page<Acquisto[]>) => {
+          this.populateTable(res.data.content, res.data.totalElements);
+        });
     }
   }
-
 
   openDettaglio(acquisto: Acquisto): void {
     this.dialog.open(AcquistiDettaglioComponent, {
@@ -74,9 +77,11 @@ export class AcquistiComponent implements OnInit {
   }
 
   pageEvent(event: PageEvent): void {
-    this.acquistiService.getAcquistiPagination(event.pageIndex, event.pageSize).subscribe((res:Page<Acquisto[]>)=>{
-      this.populateTable(res.data.content,res.data.totalElements)
-    })
+    this.acquistiService
+      .getAcquistiPagination(event.pageIndex, event.pageSize)
+      .subscribe((res: Page<Acquisto[]>) => {
+        this.populateTable(res.data.content, res.data.totalElements);
+      });
   }
 
   populateTable(acquisti: Acquisto[], elementiTotali: number): void {

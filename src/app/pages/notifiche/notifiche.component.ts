@@ -6,13 +6,10 @@ import { Prodotto } from 'src/app/models/prodotto';
 @Component({
   selector: 'app-notifiche',
   templateUrl: './notifiche.component.html',
-  styleUrls: ['./notifiche.component.scss']
+  styleUrls: ['./notifiche.component.scss'],
 })
 export class NotificheComponent implements OnInit {
+  constructor(@Inject(MAT_DIALOG_DATA) public notifiche: Notifica[]) {}
 
-  constructor(@Inject(MAT_DIALOG_DATA) public notifiche: Notifica[]) { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
