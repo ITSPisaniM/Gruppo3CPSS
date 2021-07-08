@@ -10,6 +10,7 @@ import { ProdottoDaComprare } from './models/ProdottoDaComprare';
 import { Prodotto } from './models/prodotto';
 import { ProdottiService } from './services/prodotti.service';
 import { Notifica } from './models/notifica';
+import { NotificheComponent } from './pages/notifiche/notifiche.component';
 
 @Component({
   selector: 'app-root',
@@ -69,5 +70,11 @@ export class AppComponent implements OnInit {
       
       console.log("notifiche: ", this.notifiche );   
     })
+  }
+
+  openNotifiche(): void {
+    this.dialog.open(NotificheComponent, {
+      data: this.notifiche,
+    });
   }
 }
