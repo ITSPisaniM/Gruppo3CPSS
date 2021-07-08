@@ -22,15 +22,15 @@
         brand: {{item.prodotto.brand}}
       </p>
       <p>
-        quantità: {{item.qta}}
+        quantità: {{item.quantita}}
       </p>
-
+      <button mat-button (click)="togli(item.prodotto.asin)" color="warn">canc</button>
       <mat-divider></mat-divider> 
     </mat-card-content>
   </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
-  <button mat-button (click)="svuota()">Svuota</button>
-  <button mat-button (click)="acquista()">Acquista</button>
+  <button mat-button (click)="svuota()" color="warn">Svuota</button>
+  <button mat-button (click)="acquista()"color="accent">Acquista</button>
 </div>

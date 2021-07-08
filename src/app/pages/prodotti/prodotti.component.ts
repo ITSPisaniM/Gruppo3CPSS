@@ -68,7 +68,7 @@ export class ProdottiComponent implements OnInit {
 
     var elDaComprareEQta: ProdottoDaComprare = {
       prodotto: item,
-      qta: this.loginForm.controls.qta.value
+      quantita: this.loginForm.controls.qta.value
     }
 
     if (this.controllaPresenzaCarrello(elDaComprareEQta)) {
@@ -87,7 +87,7 @@ export class ProdottiComponent implements OnInit {
     let k = this.elementiCarrello.find(j => j.prodotto.asin == el.prodotto.asin);
     let indx = this.elementiCarrello.indexOf(k);
 
-    k.qta = el.qta;
+    k.quantita = el.quantita;
 
     this.elementiCarrello[indx] = k;
 

@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ProdottoDaComprare } from '../models/ProdottoDaComprare';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -24,6 +25,12 @@ export class AcquistiService {
 
   public getAcquistiPagination(index:number, size:number): Observable<any> {
     return this.api.get(this.rootI + 'page?page=' + index + '&size=' + size , '');
+  }
+
+  public insertAcquisto(carrello:any):Observable<any>{
+    console.log(this.rootI + 'save', carrello);
+    
+    return this.api.post(this.rootI + 'save', carrello);
   }
 
   public getByFilters(
