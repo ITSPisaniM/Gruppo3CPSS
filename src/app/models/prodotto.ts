@@ -5,4 +5,5 @@ export interface Prodotto {
   price: number;
   stock: number;
   brand: string;
+  giacenzaMinima: number;
 }
