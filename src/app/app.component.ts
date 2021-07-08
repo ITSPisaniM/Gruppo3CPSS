@@ -1,13 +1,10 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { elementAt, map, shareReplay } from 'rxjs/operators';
-import { Location } from '@angular/common';
 import { AuthenticationService } from './auth/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
 import { ProdottoDaComprare } from './models/ProdottoDaComprare';
-import { Prodotto } from './models/prodotto';
 import { ProdottiService } from './services/prodotti.service';
 import { Notifica } from './models/notifica';
 import { NotificheComponent } from './pages/notifiche/notifiche.component';
