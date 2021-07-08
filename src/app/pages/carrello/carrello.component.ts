@@ -24,7 +24,7 @@ export class CarrelloComponent implements OnInit {
   }
 
   getCarrello(){
-    this.carrello = "[" + window.localStorage.getItem("carrello") + "]";
+    this.carrello = window.localStorage.getItem("carrello");
   }
 
 
@@ -34,6 +34,8 @@ export class CarrelloComponent implements OnInit {
   }
   svuota(){
     window.localStorage.removeItem("carrello");
+    this.carrello ="";
+    this.elementiCarrello = [];
     this.ngOnInit();
   }
 
