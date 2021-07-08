@@ -24,7 +24,7 @@ export class AcquistiService {
     var params = new HttpParams()
       .set('page', index.toString())
       .set('size', size.toString())
-      .set('sort', 'billDate,DESC');
+      .set('sort', 'purchaseId,DESC');
     return this.api.get(this.rootI + 'page', params);
   }
 
@@ -43,7 +43,7 @@ export class AcquistiService {
       .set('amazonOrderId', amazonOrderId)
       .set('buyerEmail', buyerEmail)
       .set('purchaseDate', purchaseDate)
-      .set('sort', 'billDate,DESC');
+      .set('sort', 'purchaseId,DESC');
     return this.api.get(this.rootI + 'filter', params);
   }
 }

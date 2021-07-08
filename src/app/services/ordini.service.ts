@@ -19,7 +19,7 @@ export class OrdiniService {
     var params = new HttpParams()
       .set('page', page.toString())
       .set('size', elements?.toString() || '')
-      .set('sort', 'purchaseDate,DESC');
+      .set('sort', 'amazonOrderId,DESC');
     return this.api.get(this.path + '/page', params);
   }
 
@@ -32,7 +32,7 @@ export class OrdiniService {
       .set('amazonOrderId', amazonOrderId)
       .set('buyerEmail', buyerEmail)
       .set('purchaseDate', purchaseDate)
-      .set('sort', 'purchaseDate,DESC');
+      .set('sort', 'amazonOrderId,DESC');
     return this.api.get(this.path, params);
   }
 }
