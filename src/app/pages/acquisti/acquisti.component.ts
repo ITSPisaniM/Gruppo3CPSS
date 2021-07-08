@@ -73,6 +73,7 @@ export class AcquistiComponent implements OnInit {
   openDettaglio(acquisto: Acquisto): void {
     this.dialog.open(AcquistiDettaglioComponent, {
       data: acquisto,
+      width: '80%',
     });
   }
 
