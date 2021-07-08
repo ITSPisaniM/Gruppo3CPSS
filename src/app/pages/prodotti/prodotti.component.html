@@ -9,7 +9,11 @@
       </mat-card-title>
       <mat-card-subtitle>{{ item.category }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="assets/images.jpg" alt="foto tech" />
+    <img
+      mat-card-image
+      src="assets/{{ item.asin }}.jpg"
+      alt="{{ item.title }}"
+    />
     <mat-card-content>
       <p>MAGAZZINO: {{ item.stock }}</p>
     </mat-card-content>
