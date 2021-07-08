@@ -40,8 +40,9 @@ export class CarrelloComponent implements OnInit {
     console.log("carrello: ", JSON.stringify({
       prodotto: this.elementiCarrello 
     }));
-    this.cart.insertAcquisto({
-      prodotto: this.elementiCarrello
+
+    this.cart.insertAcquisto({prodotto: this.elementiCarrello}).subscribe(res => {
+      console.log("res: ", res);
     });
   }
 
